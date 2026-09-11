@@ -1,0 +1,563 @@
+import 'dart:io';
+
+void main(List<String> args) async {
+  if (args.isEmpty) {
+    printUsage();
+    exit(1);
+  }
+
+  final featureName = args[0];
+  String stateManagement = 'bloc'; // Default
+
+  // Check options
+  if (args.length > 1) {
+    for (var i = 1; i < args.length; i++) {
+      if (args[i] == '--cubit' || args[i] == '-c') {
+        stateManagement = 'cubit';
+      } else if (args[i] == '--bloc' || args[i] == '-b') {
+        stateManagement = 'bloc';
+      }
+    }
+  }
+
+  print('🚀 Creating Feature: $featureName');
+  print('📦 State Management: $stateManagement');
+  print('---');
+
+  try {
+    await createFeatureStructure(featureName, stateManagement);
+    print('\n✅ Feature created successfully!');
+    print('📁 Path: lib/feature/$featureName/');
+  } catch (e) {
+    print('❌ Error: $e');
+    exit(1);
+  }
+}
+
+Future<void> createFeatureStructure(
+  String featureName,
+  String stateManagement,
+) async {
+  final baseDir = 'lib/feature/$featureName';
+  final snakeCaseName = _toSnakeCase(featureName);
+
+  // Create main directories
+  print('📂 Creating main directories...');
+  await _createDir('$baseDir/data/datasources');
+  await _createDir('$baseDir/data/models');
+  await _createDir('$baseDir/data/repositories');
+
+  await _createDir('$baseDir/domain/entities');
+  await _createDir('$baseDir/domain/repositories');
+  await _createDir('$baseDir/domain/usecases');
+
+  await _createDir('$baseDir/presentation/screens');
+  await _createDir('$baseDir/presentation/widgets');
+  await _createDir('$baseDir/presentation/${stateManagement}s');
+
+  // Create files
+  print('📄 Creating files...');
+
+  // === Data Layer ===
+  await _createFile(
+    '$baseDir/data/datasources/${snakeCaseName}_remote_datasource.dart',
+    _generateRemoteDatasource(featureName, snakeCaseName),
+  );
+
+  await _createFile(
+    '$baseDir/data/datasources/${snakeCaseName}_local_datasource.dart',
+    _generateLocalDatasource(featureName, snakeCaseName),
+  );
+
+  await _createFile(
+    '$baseDir/data/models/${snakeCaseName}_model.dart',
+    _generateModel(featureName, snakeCaseName),
+  );
+
+  await _createFile(
+    '$baseDir/data/repositories/${snakeCaseName}_repository_impl.dart',
+    _generateRepositoryImpl(featureName, snakeCaseName),
+  );
+
+  // === Domain Layer ===
+  await _createFile(
+    '$baseDir/domain/entities/${snakeCaseName}_entity.dart',
+    _generateEntity(featureName, snakeCaseName),
+  );
+
+  await _createFile(
+    '$baseDir/domain/repositories/${snakeCaseName}_repository.dart',
+    _generateAbstractRepository(featureName, snakeCaseName),
+  );
+
+  await _createFile(
+    '$baseDir/domain/usecases/get_${snakeCaseName}_usecase.dart',
+    _generateUseCase(featureName, snakeCaseName),
+  );
+
+  // === Presentation Layer ===
+  if (stateManagement == 'bloc') {
+    await _createFile(
+      '$baseDir/presentation/blocs/${snakeCaseName}_bloc.dart',
+      _generateBloc(featureName, snakeCaseName),
+    );
+
+    await _createFile(
+      '$baseDir/presentation/blocs/${snakeCaseName}_event.dart',
+      _generateBlocEvent(featureName, snakeCaseName),
+    );
+
+    await _createFile(
+      '$baseDir/presentation/blocs/${snakeCaseName}_state.dart',
+      _generateBlocState(featureName, snakeCaseName),
+    );
+  } else {
+    await _createFile(
+      '$baseDir/presentation/cubits/${snakeCaseName}_cubit.dart',
+      _generateCubit(featureName, snakeCaseName),
+    );
+
+    await _createFile(
+      '$baseDir/presentation/cubits/${snakeCaseName}_state.dart',
+      _generateCubitState(featureName, snakeCaseName),
+    );
+  }
+
+  await _createFile(
+    '$baseDir/presentation/screens/${snakeCaseName}_screen.dart',
+    _generateScreen(featureName, snakeCaseName, stateManagement),
+  );
+
+  await _createFile(
+    '$baseDir/presentation/widgets/${snakeCaseName}_widget.dart',
+    _generateWidget(featureName, snakeCaseName),
+  );
+}
+
+// ========== Generators ==========
+
+String _generateRemoteDatasource(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+/// Remote Data Source for $feature
+/// API communication methods
+
+abstract class ${className}RemoteDatasource {
+  // Add your API call methods here
+}
+
+class ${className}RemoteDatasourceImpl implements ${className}RemoteDatasource {
+  // Add your implementation here
+}
+''';
+}
+
+String _generateLocalDatasource(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+/// Local Data Source for $feature
+/// Local storage methods
+
+abstract class ${className}LocalDatasource {
+  // Add your local storage methods here
+}
+
+class ${className}LocalDatasourceImpl implements ${className}LocalDatasource {
+  // Add your implementation here
+}
+''';
+}
+
+String _generateModel(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  final entityName = '${className}Entity';
+  return '''
+/// Model for $feature
+/// Convert API data to Entity
+
+class ${className}Model {
+  final String id;
+
+  const ${className}Model({
+    required this.id,
+  });
+
+  /// Convert from Model to Entity
+  $entityName toEntity() {
+    return $entityName(id: id);
+  }
+
+  /// Convert from JSON
+  factory ${className}Model.fromJson(Map<String, dynamic> json) {
+    return ${className}Model(
+      id: json['id'] ?? '',
+    );
+  }
+
+  /// Convert to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+    };
+  }
+}
+''';
+}
+
+String _generateRepositoryImpl(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+/// Repository Implementation for $feature
+
+class ${className}RepositoryImpl implements ${className}Repository {
+  final ${className}RemoteDatasource remoteDatasource;
+  final ${className}LocalDatasource localDatasource;
+
+  ${className}RepositoryImpl({
+    required this.remoteDatasource,
+    required this.localDatasource,
+  });
+
+  // Add your method implementations here
+}
+''';
+}
+
+String _generateEntity(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+/// Entity for $feature
+
+class ${className}Entity {
+  final String id;
+
+  const ${className}Entity({
+    required this.id,
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ${className}Entity &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  String toString() => '${className}Entity(id: \$id)';
+}
+''';
+}
+
+String _generateAbstractRepository(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+/// Abstract Repository for $feature
+
+abstract class ${className}Repository {
+  // Add your abstract method signatures here
+}
+''';
+}
+
+String _generateUseCase(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+/// Use Case for getting $feature
+
+class Get${className}UseCase {
+  final ${className}Repository repository;
+
+  Get${className}UseCase(this.repository);
+
+  Future<void> call() async {
+    // Add your use case logic here
+  }
+}
+''';
+}
+
+String _generateBloc(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '${snakeName}_event.dart';
+import '${snakeName}_state.dart';
+
+/// BLoC for $feature
+
+class ${className}Bloc extends Bloc<${className}Event, ${className}State> {
+  ${className}Bloc() : super(const ${className}InitialState()) {
+    // Add your event handlers here
+    on<${className}Requested>(_on${className}Requested);
+  }
+
+  Future<void> _on${className}Requested(
+    ${className}Requested event,
+    Emitter<${className}State> emit,
+  ) async {
+    emit(const ${className}LoadingState());
+    try {
+      // Add your business logic here
+      emit(const ${className}SuccessState());
+    } catch (e) {
+      emit(${className}ErrorState(message: e.toString()));
+    }
+  }
+}
+''';
+}
+
+String _generateBlocEvent(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+/// Events for ${className}Bloc
+
+abstract class ${className}Event {
+  const ${className}Event();
+}
+
+class ${className}Requested extends ${className}Event {
+  const ${className}Requested();
+}
+
+// Add other events here
+''';
+}
+
+String _generateBlocState(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+/// States for ${className}Bloc
+
+abstract class ${className}State {
+  const ${className}State();
+}
+
+class ${className}InitialState extends ${className}State {
+  const ${className}InitialState();
+}
+
+class ${className}LoadingState extends ${className}State {
+  const ${className}LoadingState();
+}
+
+class ${className}SuccessState extends ${className}State {
+  const ${className}SuccessState();
+}
+
+class ${className}ErrorState extends ${className}State {
+  final String message;
+
+  const ${className}ErrorState({required this.message});
+}
+''';
+}
+
+String _generateCubit(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '${snakeName}_state.dart';
+
+/// Cubit for $feature
+
+class ${className}Cubit extends Cubit<${className}State> {
+  ${className}Cubit() : super(const ${className}InitialState());
+
+  Future<void> fetch${className}() async {
+    emit(const ${className}LoadingState());
+    try {
+      // Add your business logic here
+      emit(const ${className}SuccessState());
+    } catch (e) {
+      emit(${className}ErrorState(message: e.toString()));
+    }
+  }
+}
+''';
+}
+
+String _generateCubitState(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+/// States for ${className}Cubit
+
+abstract class ${className}State {
+  const ${className}State();
+}
+
+class ${className}InitialState extends ${className}State {
+  const ${className}InitialState();
+}
+
+class ${className}LoadingState extends ${className}State {
+  const ${className}LoadingState();
+}
+
+class ${className}SuccessState extends ${className}State {
+  const ${className}SuccessState();
+}
+
+class ${className}ErrorState extends ${className}State {
+  final String message;
+
+  const ${className}ErrorState({required this.message});
+}
+''';
+}
+
+String _generateScreen(
+  String feature,
+  String snakeName,
+  String stateManagement,
+) {
+  final className = _toPascalCase(feature);
+  final cubitOrBloc = stateManagement == 'cubit' ? 'Cubit' : 'Bloc';
+
+  return '''
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+${stateManagement == 'cubit' ? "import '../cubits/${snakeName}_cubit.dart';" : "import '../blocs/${snakeName}_bloc.dart';"}
+${stateManagement == 'cubit' ? "import '../cubits/${snakeName}_state.dart';" : "import '../blocs/${snakeName}_state.dart';"}
+
+/// Screen for $feature
+
+class ${className}Screen extends StatefulWidget {
+  const ${className}Screen({super.key});
+
+  @override
+  State<${className}Screen> createState() => _${className}ScreenState();
+}
+
+class _${className}ScreenState extends State<${className}Screen> {
+  @override
+  void initState() {
+    super.initState();
+    // Add your initialization and initial data here
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('$feature'),
+      ),
+      body: BlocBuilder<${className}${cubitOrBloc}, ${className}State>(
+        builder: (context, state) {
+          if (state is ${className}LoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state is ${className}ErrorState) {
+            return Center(child: Text('Error: \${state.message}'));
+          }
+          if (state is ${className}SuccessState) {
+            return const Center(child: Text('Success'));
+          }
+          return const Center(child: Text('Initial'));
+        },
+      ),
+    );
+  }
+}
+''';
+}
+
+String _generateWidget(String feature, String snakeName) {
+  final className = _toPascalCase(feature);
+  return '''
+import 'package:flutter/material.dart';
+
+/// Widget for $feature
+
+class ${className}Widget extends StatelessWidget {
+  const ${className}Widget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // Add your UI here
+      child: const Text('$feature Widget'),
+    );
+  }
+}
+''';
+}
+
+// ========== Utility Functions ==========
+
+Future<void> _createDir(String path) async {
+  final directory = Directory(path);
+  if (!await directory.exists()) {
+    await directory.create(recursive: true);
+  }
+}
+
+Future<void> _createFile(String path, String content) async {
+  final file = File(path);
+  if (!await file.exists()) {
+    await file.create(recursive: true);
+  }
+  await file.writeAsString(content);
+}
+
+String _toSnakeCase(String input) {
+  return input
+      .replaceAllMapped(
+        RegExp(r'[A-Z]'),
+        (m) => '_\${m.group(0)!.toLowerCase()}',
+      )
+      .replaceAll(RegExp(r'^_'), '')
+      .toLowerCase();
+}
+
+String _toPascalCase(String input) {
+  return input
+      .split(RegExp(r'[_-]'))
+      .map((word) => word[0].toUpperCase() + word.substring(1).toLowerCase())
+      .join('');
+}
+
+void printUsage() {
+  print('''
+╔════════════════════════════════════════════════════════════╗
+║        Flutter Feature Generator (Clean Architecture)       ║
+╚════════════════════════════════════════════════════════════╝
+
+Usage:
+  dart run gen_feature.dart <feature_name> [options]
+
+Examples:
+  # Create a feature using BLoC (default)
+  dart run gen_feature.dart home
+
+  # Create a feature using Cubit
+  dart run gen_feature.dart home --cubit
+  dart run gen_feature.dart home -c
+
+  # Create a feature using BLoC (explicit)
+  dart run gen_feature.dart home --bloc
+  dart run gen_feature.dart home -b
+
+Options:
+  --bloc, -b     Use BLoC (default)
+  --cubit, -c    Use Cubit
+
+The tool will create the following structure:
+  lib/feature/<feature_name>/
+  ├── data/
+  │   ├── datasources/
+  │   ├── models/
+  │   └── repositories/
+  ├── domain/
+  │   ├── entities/
+  │   ├── repositories/
+  │   └── usecases/
+  └── presentation/
+      ├── screens/
+      ├── widgets/
+      └── [blocs/] or [cubits/]
+''');
+}
