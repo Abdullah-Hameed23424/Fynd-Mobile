@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fynd/Core/navigation/routes_constants.dart';
+import 'package:fynd/core/navigation/routes_constants.dart';
+import 'package:fynd/feature/auth/presentation/screens/Register_screen.dart';
 import 'package:fynd/feature/auth/presentation/screens/login_screen.dart';
 import 'package:fynd/feature/home/presentation/screens/home_screen.dart';
 import 'package:fynd/feature/splash/presentation/screens/splash_screen.dart';
@@ -10,6 +11,7 @@ abstract class PageRoutes {
     return {
       Routes.splash: (_) => const SplashScreen(),
       Routes.login: (_) => const LoginScreen(),
+      Routes.register: (_) => const RegisterScreen(),
       Routes.home: (_) => const HomeScreen(),
     };
   }

@@ -1,4 +1,4 @@
-// ignore_for_file: always_use_package_imports
+// ignore_for_file: unused_import, always_use_package_imports
 
 import 'package:flutter/material.dart';
 import 'routes_constants.dart';
@@ -10,7 +10,7 @@ import 'route_arguments.dart';
 abstract class DynamicRoutes {
   /// Generate route with custom animations and argument handling
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    final args = settings.arguments;
+    // final args = settings.arguments;
 
     switch (settings.name) {
       // Product Detail Route
@@ -38,6 +38,7 @@ abstract class DynamicRoutes {
         );
     }
 
+    // ignore: dead_code
     return null;
   }
 

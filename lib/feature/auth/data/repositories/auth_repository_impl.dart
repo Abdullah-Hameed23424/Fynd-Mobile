@@ -1,17 +1,38 @@
-import 'package:fynd/feature/auth/data/datasources/auth_local_datasource.dart';
+import 'package:fynd/core/local_storage/flutter_secure_storage/app_storage.dart';
 import 'package:fynd/feature/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:fynd/feature/auth/domain/repositories/auth_repository.dart';
 
-/// Repository Implementation for auth
-
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDatasource remoteDatasource;
-  final AuthLocalDatasource localDatasource;
+  final AuthRemoteDataSource remoteDataSource;
 
-  AuthRepositoryImpl({
-    required this.remoteDatasource,
-    required this.localDatasource,
-  });
+  AuthRepositoryImpl(this.remoteDataSource);
 
-  // Add your method implementations here
+  @override
+  Future<void> login({required String email, required String password}) async {
+    final response = await remoteDataSource.login(
+      email: email,
+      password: password,
+    );
+
+    final data = response.data;
+    await AppStorage.saveToken(data['token']);
+    await AppStorage.saveMyId(data['id']);
+  }
+
+  @override
+  Future<void> register({
+    required String fullname,
+    required String email,
+    required String password,
+  }) async {
+    final response = await remoteDataSource.register(
+      fullname: fullname,
+      email: email,
+      password: password,
+    );
+
+    final data = response.data;
+    await AppStorage.saveToken(data['token']);
+    await AppStorage.saveMyId(data['id']);
+  }
 }

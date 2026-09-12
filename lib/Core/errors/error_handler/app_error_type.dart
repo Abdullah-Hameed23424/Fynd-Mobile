@@ -1,0 +1,17 @@
+enum AppErrorType {
+  unknown,
+  connectionTimeout,
+  sendTimeout,
+  receiveTimeout,
+  badRequest,
+  unauthorized,
+  forbidden,
+  notFound,
+  validation,
+  serverDown,
+  serverError,
+  cancelled,
+  internet,
+  certificate,
+  connection,
+}

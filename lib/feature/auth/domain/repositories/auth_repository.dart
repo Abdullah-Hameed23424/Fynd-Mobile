@@ -1,5 +1,9 @@
-/// Abstract Repository for auth
-
 abstract class AuthRepository {
-  // Add your abstract method signatures here
+  Future<void> login({required String email, required String password});
+
+  Future<void> register({
+    required String fullname,
+    required String email,
+    required String password,
+  });
 }

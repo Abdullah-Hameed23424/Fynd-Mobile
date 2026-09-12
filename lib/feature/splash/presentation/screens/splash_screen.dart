@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:fynd/Core/constants/app_images.dart';
-import 'package:fynd/Core/theme/app_colors.dart';
-import 'package:fynd/Core/theme/text_theme_extension.dart';
-import 'package:fynd/Core/navigation/routes_constants.dart';
+import 'package:fynd/core/constants/app_images.dart';
+import 'package:fynd/core/theme/app_colors.dart';
+import 'package:fynd/core/extensions/text_theme_extension.dart';
+import 'package:fynd/core/navigation/routes_constants.dart';
 import 'package:fynd/feature/splash/domain/usecases/check_auth_status_use_case.dart';
 import 'package:fynd/feature/splash/presentation/cubits/splash_cubit.dart';
 import 'package:fynd/feature/splash/presentation/cubits/splash_state.dart';
@@ -20,16 +20,10 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-    super.initState();
-
-    context.read<SplashCubit>().checkUserStatus();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SplashCubit(CheckAuthStatusUseCase()),
+    return BlocProvider<SplashCubit>(
+      create: (context) =>
+          SplashCubit(CheckAuthStatusUseCase())..checkUserStatus(),
       child: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
           if (state is SplashAuthenticated) {
@@ -60,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
                 FadeIn(
                   delay: const Duration(milliseconds: 100),
-                  child: Text('Fynd', style: context.titleLarge34),
+                  child: Text('Fynd', style: context.titleLarge40),
                 ),
 
                 SizedBox(height: 10.h),

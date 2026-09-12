@@ -1,6 +1,6 @@
 class AppConfig {
   // API Configuration
-  static const String domain = 'https://....'; // TODO add the rigth domain
+  static const String domain = 'http://fynd.runasp.net/';
   static const String baseUrl = '$domain/api/';
   static const String storageUrl = '$domain/storage/';
   static const int apiTimeout = 30; // seconds
@@ -19,7 +19,7 @@ class AppConfig {
 
   // UI Configuration
 
-  static const String defaultFontFamily = 'Tajawal';
+  static const String defaultFontFamily = 'Inter';
   static const String defaultLocale = 'en';
 
   /// Check if running in debug mode
