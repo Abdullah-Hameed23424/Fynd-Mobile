@@ -35,4 +35,14 @@ class AuthRepositoryImpl implements AuthRepository {
     await AppStorage.saveToken(data['token']);
     await AppStorage.saveMyId(data['id']);
   }
+
+  @override
+  Future<void> forgetPassword({required String email}) async {
+    await remoteDataSource.forgetPassword(email: email);
+  }
+
+  @override
+  Future<void> verifyOtp({required String email, required String otp}) async {
+    await remoteDataSource.verifyOtp(email: email, otp: otp);
+  }
 }

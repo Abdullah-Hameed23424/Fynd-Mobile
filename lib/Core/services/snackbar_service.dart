@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fynd/core/navigation/navigation_service.dart';
-import 'package:fynd/core/widgets/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 /// --------------------------------------------------------------------------

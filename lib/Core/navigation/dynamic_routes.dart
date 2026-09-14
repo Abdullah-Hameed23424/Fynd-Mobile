@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import, always_use_package_imports
 
 import 'package:flutter/material.dart';
+import 'package:fynd/feature/auth/presentation/screens/otp_screen.dart';
 import 'routes_constants.dart';
 import 'route_arguments.dart';
 
@@ -10,19 +11,16 @@ import 'route_arguments.dart';
 abstract class DynamicRoutes {
   /// Generate route with custom animations and argument handling
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    // final args = settings.arguments;
+    final args = settings.arguments;
 
     switch (settings.name) {
-      // Product Detail Route
-      // case Routes.test:
-      //   if (args is ProductDetailArguments) {
-      //     // TODO: Uncomment when ProductDetailPage is available
-      //     // return PageTransitions.slideFromRightTransition(
-      //     //   ProductDetailPage(arguments: args),
-      //     //   settings,
-      //     // );
-      //   }
-      //   break;
+      case Routes.otp:
+        if (args is OtpArguments) {
+          return MaterialPageRoute(
+            builder: (_) => OtpScreen(email: args.email),
+          );
+        }
+        break;
 
       // 404 Not Found
       default:

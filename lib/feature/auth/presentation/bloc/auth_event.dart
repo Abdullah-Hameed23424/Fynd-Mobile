@@ -29,3 +29,20 @@ final class RegisterEvent extends AuthEvent {
   @override
   List<Object> get props => [email, password];
 }
+
+final class ForgetPasswordEvent extends AuthEvent {
+  final String email;
+  const ForgetPasswordEvent({required this.email});
+
+  @override
+  List<Object> get props => [email];
+}
+
+final class VerifyOtpEvent extends AuthEvent {
+  final String email;
+  final String otp;
+  const VerifyOtpEvent({required this.email, required this.otp});
+
+  @override
+  List<Object> get props => [email, otp];
+}

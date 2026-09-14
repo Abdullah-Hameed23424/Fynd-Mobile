@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:fynd/core/navigation/route_arguments.dart';
+
 import 'navigation_service.dart';
 import 'routes_constants.dart';
 import 'route_guards.dart';
@@ -17,6 +19,14 @@ abstract class NavigationCoordinator {
 
   static Future<dynamic>? toRegister() {
     return NavigationService.navigateAndRemoveUntil(Routes.register);
+  }
+
+  static Future<dynamic>? toForgetPassword() {
+    return NavigationService.navigateTo(Routes.forgetPassword);
+  }
+
+  static Future<dynamic>? toOtp({required OtpArguments args}) {
+    return NavigationService.navigateTo(Routes.otp, arguments: args);
   }
 
   // ========== Auth ==========

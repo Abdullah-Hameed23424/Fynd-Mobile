@@ -32,3 +32,27 @@ final class RegisterError extends AuthState {
   @override
   List<Object> get props => [msg];
 }
+
+final class ForgetPasswordLoading extends AuthState {}
+
+final class ForgetPasswordSuccess extends AuthState {}
+
+final class ForgetPasswordError extends AuthState {
+  final String msg;
+  const ForgetPasswordError({required this.msg});
+
+  @override
+  List<Object> get props => [msg];
+}
+
+final class VerifyOtpLoading extends AuthState {}
+
+final class VerifyOtpSuccess extends AuthState {}
+
+final class VerifyOtpError extends AuthState {
+  final String msg;
+  const VerifyOtpError({required this.msg});
+
+  @override
+  List<Object> get props => [msg];
+}

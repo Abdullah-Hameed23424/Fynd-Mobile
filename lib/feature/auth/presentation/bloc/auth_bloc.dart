@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fynd/core/errors/error_handler/exception_handler.dart';
+import 'package:fynd/feature/auth/domain/usecases/forget_password_use_case.dart';
 import 'package:fynd/feature/auth/domain/usecases/login_use_case.dart';
 import 'package:fynd/feature/auth/domain/usecases/register_use_case.dart';
+import 'package:fynd/feature/auth/domain/usecases/verify_otp_use_case.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -10,10 +12,19 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
+  final ForgetPasswordUseCase forgetPasswordUseCase;
+  final VerifyOtpUseCase verifyOtpUseCase;
 
-  AuthBloc(this.loginUseCase, this.registerUseCase) : super(AuthInitial()) {
+  AuthBloc({
+    required this.loginUseCase,
+    required this.registerUseCase,
+    required this.forgetPasswordUseCase,
+    required this.verifyOtpUseCase,
+  }) : super(AuthInitial()) {
     on<LoginEvent>(_onLogin);
     on<RegisterEvent>(_onRegister);
+    on<ForgetPasswordEvent>(_onForgetPassword);
+    on<VerifyOtpEvent>(_onVerifyOtp);
   }
 
   Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
@@ -43,6 +54,38 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } catch (e, s) {
       logApiName('_onRegister');
       emit(RegisterError(msg: handleError(e, stackTrace: s)));
+    }
+  }
+
+  Future<void> _onForgetPassword(
+    ForgetPasswordEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(ForgetPasswordLoading());
+
+    try {
+      await forgetPasswordUseCase(email: event.email);
+
+      emit(ForgetPasswordSuccess());
+    } catch (e, s) {
+      logApiName('_onForgetPassword');
+      emit(ForgetPasswordError(msg: handleError(e, stackTrace: s)));
+    }
+  }
+
+  Future<void> _onVerifyOtp(
+    VerifyOtpEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(VerifyOtpLoading());
+
+    try {
+      await verifyOtpUseCase(email: event.email, otp: event.otp);
+
+      emit(VerifyOtpSuccess());
+    } catch (e, s) {
+      logApiName('_onVerifyOtp');
+      emit(VerifyOtpError(msg: handleError(e, stackTrace: s)));
     }
   }
 }

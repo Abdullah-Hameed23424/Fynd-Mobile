@@ -6,6 +6,13 @@ class RouteArguments {
 }
 
 /// Product Detail Arguments
+class OtpArguments {
+  final String email;
+
+  OtpArguments({required this.email});
+}
+
+/// Product Detail Arguments
 class ProductDetailArguments {
   final String productId;
   final String? productName;
