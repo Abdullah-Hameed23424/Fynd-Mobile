@@ -6,6 +6,7 @@ class ApiEndpoints {
   static const String register = 'auth/register';
   static const String forgetPassword = 'auth/forgot-password';
   static const String otp = 'auth/verify-otp';
+  static const String resetPassword = 'auth/reset-password';
 
   static const String testEndpoint = 'test';
   static String testEndpointByAttribute({required Object id}) =>

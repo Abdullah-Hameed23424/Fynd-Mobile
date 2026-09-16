@@ -42,7 +42,22 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> verifyOtp({required String email, required String otp}) async {
-    await remoteDataSource.verifyOtp(email: email, otp: otp);
+  Future<String> verifyOtp({required String email, required String otp}) async {
+    final response = await remoteDataSource.verifyOtp(email: email, otp: otp);
+
+    return response.data['resetToken'];
+  }
+
+  @override
+  Future<void> resetPassword({
+    required String resetToken,
+    required String password,
+    required String confirmPassword,
+  }) async {
+    await remoteDataSource.resetPassword(
+      resetToken: resetToken,
+      password: password,
+      confirmPassword: confirmPassword,
+    );
   }
 }

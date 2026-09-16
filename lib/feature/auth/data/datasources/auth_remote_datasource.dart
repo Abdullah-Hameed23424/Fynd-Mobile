@@ -15,6 +15,12 @@ abstract class AuthRemoteDataSource {
   Future<Response> forgetPassword({required String email});
 
   Future<Response> verifyOtp({required String email, required String otp});
+
+  Future<Response> resetPassword({
+    required String resetToken,
+    required String password,
+    required String confirmPassword,
+  });
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -54,6 +60,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return NetworkClient.post(
       url: ApiEndpoints.otp,
       data: {'email': email, 'otp': otp},
+    );
+  }
+
+  @override
+  Future<Response<dynamic>> resetPassword({
+    required String resetToken,
+    required String password,
+    required String confirmPassword,
+  }) {
+    return NetworkClient.post(
+      url: ApiEndpoints.resetPassword,
+      data: {
+        'resetToken': resetToken,
+        'newPassword': password,
+        'confirmPassword': confirmPassword,
+      },
     );
   }
 }

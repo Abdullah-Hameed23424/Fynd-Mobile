@@ -46,3 +46,17 @@ final class VerifyOtpEvent extends AuthEvent {
   @override
   List<Object> get props => [email, otp];
 }
+
+final class ResetPasswordEvent extends AuthEvent {
+  final String resetToken;
+  final String password;
+  final String confirmPassword;
+  const ResetPasswordEvent({
+    required this.resetToken,
+    required this.password,
+    required this.confirmPassword,
+  });
+
+  @override
+  List<Object> get props => [resetToken, password, confirmPassword];
+}

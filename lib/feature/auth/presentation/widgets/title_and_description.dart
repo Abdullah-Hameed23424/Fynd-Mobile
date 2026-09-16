@@ -22,7 +22,7 @@ class TitleAndDescription extends StatelessWidget {
       children: <Widget>[
         AuthAnimatedItem(
           index: 1,
-          child: Text(title, style: context.titleLarge40),
+          child: Text(title, style: context.titleLarge32),
         ),
 
         AuthAnimatedItem(

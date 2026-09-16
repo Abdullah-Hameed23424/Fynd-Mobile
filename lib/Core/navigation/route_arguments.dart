@@ -5,35 +5,17 @@ class RouteArguments {
   RouteArguments(this.data);
 }
 
-/// Product Detail Arguments
 class OtpArguments {
   final String email;
-
   OtpArguments({required this.email});
 }
 
-/// Product Detail Arguments
-class ProductDetailArguments {
-  final String productId;
-  final String? productName;
-
-  ProductDetailArguments({required this.productId, this.productName});
+class ResetPasswordArguments {
+  final String resetToken;
+  ResetPasswordArguments({required this.resetToken});
 }
 
-/// User Detail Arguments
-class UserDetailArguments {
-  final String userId;
-  final String? userName;
-
-  UserDetailArguments({required this.userId, this.userName});
+class NavBarArguments {
+  final int? index;
+  NavBarArguments({required this.index});
 }
-
-/// Settings Arguments
-class SettingsArguments {
-  final String? initialTab;
-  final bool? showNotifications;
-
-  SettingsArguments({this.initialTab, this.showNotifications});
-}
-
-/// Add more argument models as needed for each route

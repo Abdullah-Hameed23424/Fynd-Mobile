@@ -13,6 +13,7 @@ class AppTheme {
       fontFamily: AppConfig.defaultFontFamily,
       textTheme: TextTheme(
         titleLarge: AppTypography.titleLarge,
+        titleMedium: AppTypography.titleMedium,
         titleSmall: AppTypography.titleSmall,
         bodyMedium: AppTypography.bodyMedium,
         bodySmall: AppTypography.bodySmall,

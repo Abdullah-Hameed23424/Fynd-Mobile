@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:fynd/feature/auth/presentation/screens/otp_screen.dart';
+import 'package:fynd/feature/auth/presentation/screens/reset_password_screen.dart';
+import 'package:fynd/feature/home/presentation/screens/nav_bar_screen.dart';
 import 'routes_constants.dart';
 import 'route_arguments.dart';
 
@@ -18,6 +20,22 @@ abstract class DynamicRoutes {
         if (args is OtpArguments) {
           return MaterialPageRoute(
             builder: (_) => OtpScreen(email: args.email),
+          );
+        }
+        break;
+
+      case Routes.resetPassword:
+        if (args is ResetPasswordArguments) {
+          return MaterialPageRoute(
+            builder: (_) => ResetPasswordScreen(resetToken: args.resetToken),
+          );
+        }
+        break;
+
+      case Routes.navBar:
+        if (args is NavBarArguments) {
+          return MaterialPageRoute(
+            builder: (_) => NavBarScreen(index: args.index),
           );
         }
         break;

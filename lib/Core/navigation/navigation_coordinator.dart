@@ -29,7 +29,20 @@ abstract class NavigationCoordinator {
     return NavigationService.navigateTo(Routes.otp, arguments: args);
   }
 
-  // ========== Auth ==========
+  static Future<dynamic>? toResetPassword({
+    required ResetPasswordArguments args,
+  }) {
+    return NavigationService.navigateTo(Routes.resetPassword, arguments: args);
+  }
+
+  // ========== Home ==========
+  static Future<dynamic>? toNavBar({required NavBarArguments args}) {
+    return NavigationService.navigateAndRemoveUntil(
+      Routes.navBar,
+      arguments: args,
+    );
+  }
+
   static Future<dynamic>? toHome() {
     return NavigationService.navigateAndRemoveUntil(Routes.home);
   }

@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../domain/usecases/check_auth_status_use_case.dart';
-import 'splash_state.dart';
+import 'package:fynd/feature/splash/domain/usecases/check_auth_status_use_case.dart';
+import 'package:fynd/feature/splash/presentation/cubits/splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
   final CheckAuthStatusUseCase checkAuthStatus;
@@ -13,7 +12,7 @@ class SplashCubit extends Cubit<SplashState> {
       emit(SplashLoading());
 
       await Future.delayed(const Duration(seconds: 3));
-      final isAuthenticated = false; // await checkAuthStatus();
+      final isAuthenticated = await checkAuthStatus();
 
       if (isAuthenticated) {
         emit(SplashAuthenticated());

@@ -8,6 +8,12 @@ class AppTypography {
     fontWeight: FontWeight.bold,
   );
 
+  static TextStyle get titleMedium => TextStyle(
+    color: Colors.black,
+    fontSize: 19.sp,
+    fontWeight: FontWeight.bold,
+  );
+
   static TextStyle get titleSmall => TextStyle(
     color: Colors.black,
     fontSize: 12.sp,

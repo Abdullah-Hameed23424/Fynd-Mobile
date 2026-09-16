@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/core/animations/auth_animated_item.dart';
 import 'package:fynd/core/constants/app_images.dart';
 import 'package:fynd/core/di/auth_dependencies.dart';
+import 'package:fynd/core/navigation/navigation_coordinator.dart';
+import 'package:fynd/core/navigation/route_arguments.dart';
 import 'package:fynd/core/services/snackbar_service.dart';
 import 'package:fynd/core/utils/custom_timer.dart';
 import 'package:fynd/core/widgets/pop_button.dart';
@@ -21,7 +23,6 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  // ignore: unused_field
   late final GlobalKey<FormState> _otpKey;
   late final TextEditingController _otpController;
   late final CustomTimer _timer;
@@ -75,9 +76,13 @@ class _OtpScreenState extends State<OtpScreen> {
                     child: BlocListener<AuthBloc, AuthState>(
                       listener: (context, state) {
                         if (state is VerifyOtpSuccess) {
-                          // NavigationCoordinator.toHome();
                           snackBarService.showSuccess(
                             message: 'OTP verified successfully',
+                          );
+                          NavigationCoordinator.toResetPassword(
+                            args: ResetPasswordArguments(
+                              resetToken: state.resetToken,
+                            ),
                           );
                         } else if (state is VerifyOtpError) {
                           snackBarService.showError(message: state.msg);
