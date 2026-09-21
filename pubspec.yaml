@@ -25,6 +25,7 @@ dependencies:
   top_snackbar_flutter: ^3.4.0
   pinput: ^6.0.2
   persistent_bottom_nav_bar: ^6.2.1
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

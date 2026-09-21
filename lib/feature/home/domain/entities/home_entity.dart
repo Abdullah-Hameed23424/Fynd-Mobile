@@ -1,22 +1,13 @@
-/// Entity for home
+import 'package:equatable/equatable.dart';
+import 'package:fynd/feature/home/domain/entities/category_entity.dart';
+import 'package:fynd/feature/home/domain/entities/recent_post_entity.dart';
 
-class HomeEntity {
-  final String id;
+class HomeEntity extends Equatable {
+  final List<RecentPostEntity> recentPosts;
+  final List<CategoryEntity> categories;
 
-  const HomeEntity({
-    required this.id,
-  });
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is HomeEntity &&
-          runtimeType == other.runtimeType &&
-          id == other.id;
+  const HomeEntity({required this.recentPosts, required this.categories});
 
   @override
-  int get hashCode => id.hashCode;
-
-  @override
-  String toString() => 'HomeEntity(id: $id)';
+  List<Object> get props => [recentPosts, categories];
 }

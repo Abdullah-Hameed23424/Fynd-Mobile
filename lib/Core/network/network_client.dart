@@ -1,4 +1,5 @@
 import 'package:fynd/core/config/app_config.dart';
+import 'package:fynd/core/local_storage/flutter_secure_storage/app_storage.dart';
 import 'package:fynd/core/local_storage/shared_preferences/app_shared_preferences.dart';
 
 import 'package:dio/dio.dart';
@@ -15,7 +16,7 @@ class NetworkClient {
   /// Initialize the network client
   /// Should be called once at app startup
   static Future<void> init() async {
-    _token = "";
+    _token = await AppStorage.getToken;
     dio = Dio(
       BaseOptions(
         baseUrl: AppConfig.baseUrl,

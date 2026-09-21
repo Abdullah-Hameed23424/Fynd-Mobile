@@ -1,17 +1,21 @@
-import 'package:fynd/feature/home/data/datasources/home_local_datasource.dart';
-import 'package:fynd/feature/home/data/datasources/home_remote_datasource.dart';
+import 'package:fynd/feature/home/data/datasources/home_remote_data_source.dart';
+import 'package:fynd/feature/home/data/models/home_response.dart';
+import 'package:fynd/feature/home/domain/entities/home_entity.dart';
 import 'package:fynd/feature/home/domain/repositories/home_repository.dart';
 
 /// Repository Implementation for home
 
 class HomeRepositoryImpl implements HomeRepository {
-  final HomeRemoteDatasource remoteDatasource;
-  final HomeLocalDatasource localDatasource;
+  final HomeRemoteDataSource remoteDataSource;
 
-  HomeRepositoryImpl({
-    required this.remoteDatasource,
-    required this.localDatasource,
-  });
+  HomeRepositoryImpl({required this.remoteDataSource});
 
-  // Add your method implementations here
+  @override
+  Future<HomeEntity> getHomeInfo() async {
+    final response = await remoteDataSource.getHomeInfo();
+
+    final homeResponse = HomeResponse.fromMap(response.data);
+
+    return homeResponse.toEntity();
+  }
 }

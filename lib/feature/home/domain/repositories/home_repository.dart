@@ -1,5 +1,5 @@
-/// Abstract Repository for home
+import 'package:fynd/feature/home/domain/entities/home_entity.dart';
 
 abstract class HomeRepository {
-  // Add your abstract method signatures here
+  Future<HomeEntity> getHomeInfo();
 }

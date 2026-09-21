@@ -1,30 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fynd/core/extensions/text_theme_extension.dart';
+import 'package:fynd/core/widgets/try_again.dart';
+import 'package:fynd/feature/home/presentation/cubit/home_cubit.dart';
+import 'package:fynd/feature/home/presentation/widgets/recent_post_card.dart';
+import 'package:fynd/feature/home/presentation/widgets/recent_post_card_shimmer.dart';
 
 class RecentPostsSection extends StatelessWidget {
   const RecentPostsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('Recent Posts', style: context.titleMedium19),
-            TextButton(onPressed: () {}, child: Text('See all')),
-          ],
-        ),
-
-        SizedBox(height: 14.h),
-        ListView.separated(
-          itemBuilder: (context, index) => Container(),
-          separatorBuilder: (context, index) => SizedBox(height: 14.h),
-          itemCount: 3,
-        ),
-      ],
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        if (state is HomeLoading) {
+          return SliverList.separated(
+            itemBuilder: (context, index) => const RecentPostCardShimmer(),
+            separatorBuilder: (context, index) => SizedBox(height: 14.h),
+            itemCount: 3,
+          );
+        } else if (state is HomeError) {
+          return SliverToBoxAdapter(
+            child: TryAgain(onTap: () {}, message: state.msg),
+          );
+        } else if (state is HomeLoaded) {
+          final recentPosts = state.homeEntity.recentPosts;
+          return SliverList.separated(
+            itemBuilder: (context, index) =>
+                RecentPostCard(recentPostEntity: recentPosts[index]),
+            separatorBuilder: (context, index) => SizedBox(height: 14.h),
+            itemCount: recentPosts.take(7).length,
+          );
+        }
+        return const SliverToBoxAdapter(child: SizedBox.shrink());
+      },
     );
   }
 }

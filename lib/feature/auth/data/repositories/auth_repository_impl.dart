@@ -1,4 +1,5 @@
 import 'package:fynd/core/local_storage/flutter_secure_storage/app_storage.dart';
+import 'package:fynd/core/network/network_client.dart';
 import 'package:fynd/feature/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:fynd/feature/auth/domain/repositories/auth_repository.dart';
 
@@ -16,6 +17,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
     final data = response.data;
     await AppStorage.saveToken(data['token']);
+    NetworkClient.updateAuthToken(data['token']);
     await AppStorage.saveMyId(data['id']);
   }
 
@@ -33,6 +35,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
     final data = response.data;
     await AppStorage.saveToken(data['token']);
+    NetworkClient.updateAuthToken(data['token']);
     await AppStorage.saveMyId(data['id']);
   }
 

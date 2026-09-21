@@ -8,6 +8,9 @@ class ApiEndpoints {
   static const String otp = 'auth/verify-otp';
   static const String resetPassword = 'auth/reset-password';
 
+  /// [Auth]
+  static const String home = 'home';
+
   static const String testEndpoint = 'test';
   static String testEndpointByAttribute({required Object id}) =>
       'test/$id/test(maybe)';

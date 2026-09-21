@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fynd/core/animations/auth_animated_item.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/navigation/navigation_coordinator.dart';
+import 'package:fynd/core/navigation/route_arguments.dart';
 import 'package:fynd/core/services/snackbar_service.dart';
 import 'package:fynd/core/theme/app_colors.dart';
 import 'package:fynd/core/widgets/app_loading.dart';
@@ -32,7 +33,7 @@ class LoginFooter extends StatelessWidget {
         BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
-              NavigationCoordinator.toHome();
+              NavigationCoordinator.toNavBar(args: NavBarArguments(index: 0));
               snackBarService.showSuccess(message: 'Logged in successfully');
             } else if (state is LoginError) {
               snackBarService.showError(message: state.msg);

@@ -25,6 +25,7 @@ Future<void> _initializeServices() async {
 void _logDebugInfo() async {
   log('Token: ${await AppStorage.getToken}');
   log('Has token: ${await AppStorage.hasToken}');
+  // AppStorage.removeToken();
 }
 
 class MyApp extends StatelessWidget {
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           initialRoute: Routes.splash,
           navigatorKey: NavigationService.navigatorKey,
           theme: AppTheme.lightTheme(context),
-          debugShowCheckedModeBanner: true,
+          debugShowCheckedModeBanner: false,
         );
       },
     );
