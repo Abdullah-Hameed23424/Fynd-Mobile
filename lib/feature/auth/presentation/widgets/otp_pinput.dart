@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/Core/theme/app_colors.dart';
-import 'package:fynd/core/animations/auth_animated_item.dart';
+import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/dimensions/dimensions.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:pinput/pinput.dart';
@@ -41,7 +41,7 @@ class OtpPinput extends StatelessWidget {
         color: AppColors.primary.withAlpha(100),
       ),
     );
-    return AuthAnimatedItem(
+    return AnimatedItem(
       index: 3,
       child: Directionality(
         textDirection: TextDirection.ltr,

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/utils/validators/fullname_validator.dart';
 import 'package:fynd/core/utils/validators/validators_barrel.dart';
-import 'package:fynd/core/animations/auth_animated_item.dart';
+import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/widgets/custom_text_field.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
 
@@ -69,12 +69,12 @@ class _RegisterFormState extends State<RegisterForm> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          AuthAnimatedItem(
+          AnimatedItem(
             index: 3,
             child: Text('Full name', style: context.titleSmall12),
           ),
           SizedBox(height: 4.h),
-          AuthAnimatedItem(
+          AnimatedItem(
             index: 4,
             child: CustomTextField(
               controller: widget.fullnameController,
@@ -91,12 +91,12 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
 
           SizedBox(height: 20.h),
-          AuthAnimatedItem(
+          AnimatedItem(
             index: 5,
             child: Text('Email', style: context.titleSmall12),
           ),
           SizedBox(height: 4.h),
-          AuthAnimatedItem(
+          AnimatedItem(
             index: 6,
             child: CustomTextField(
               controller: widget.emailController,
@@ -114,12 +114,12 @@ class _RegisterFormState extends State<RegisterForm> {
 
           SizedBox(height: 20.h),
 
-          AuthAnimatedItem(
+          AnimatedItem(
             index: 7,
             child: Text('Password', style: context.titleSmall12),
           ),
           SizedBox(height: 4.h),
-          AuthAnimatedItem(
+          AnimatedItem(
             index: 8,
             child: CustomTextField(
               controller: widget.passwordController,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fynd/core/animations/auth_animated_item.dart';
+import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/navigation/navigation_coordinator.dart';
 import 'package:fynd/core/navigation/route_arguments.dart';
@@ -43,7 +43,7 @@ class ForgetPasswordFooter extends StatelessWidget {
             if (state is ForgetPasswordLoading) {
               return const AppLoading();
             }
-            return AuthAnimatedItem(
+            return AnimatedItem(
               index: 5,
               child: CustomButton(
                 label: 'Send reset link',
@@ -61,7 +61,7 @@ class ForgetPasswordFooter extends StatelessWidget {
 
         SizedBox(height: 30.h),
 
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 6,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 16.h),
@@ -109,14 +109,14 @@ class ForgetPasswordFooter extends StatelessWidget {
 
         SizedBox(height: 56.h),
 
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 7,
           child: Text(
             'Remember your password?',
             style: context.bodySmall14.copyWith(color: AppColors.textGray),
           ),
         ),
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 8,
           child: TextButton(
             onPressed: NavigationCoordinator.toLogin,

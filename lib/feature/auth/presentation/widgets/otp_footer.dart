@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/Core/theme/app_colors.dart';
-import 'package:fynd/core/animations/auth_animated_item.dart';
+import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/services/snackbar_service.dart';
 import 'package:fynd/core/utils/custom_timer.dart';
@@ -31,7 +31,7 @@ class OtpFooter extends StatelessWidget {
             if (state is VerifyOtpLoading) {
               return const AppLoading();
             }
-            return AuthAnimatedItem(
+            return AnimatedItem(
               index: 4,
               child: CustomButton(
                 label: 'Send',
@@ -53,7 +53,7 @@ class OtpFooter extends StatelessWidget {
 
         SizedBox(height: 28.h),
 
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 5,
           child: ValueListenableBuilder<int>(
             valueListenable: timer.remainingSeconds,
@@ -73,7 +73,7 @@ class OtpFooter extends StatelessWidget {
 
         SizedBox(height: 10.h),
 
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 6,
           child: BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {

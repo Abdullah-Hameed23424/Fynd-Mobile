@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fynd/core/animations/auth_animated_item.dart';
+import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/constants/app_images.dart';
 import 'package:fynd/core/di/auth_dependencies.dart';
 import 'package:fynd/core/widgets/pop_button.dart';
@@ -47,14 +47,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         appBar: AppBar(
           leading: const PopButton(),
           bottom: AppBar(
-            leading: AuthAnimatedItem(
+            leading: AnimatedItem(
               index: 0,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4.h),
                 child: Image.asset(AppImages.appLogo),
               ),
             ),
-            title: const AuthAnimatedItem(index: 0, child: Text('Fynd')),
+            title: const AnimatedItem(index: 0, child: Text('Fynd')),
           ),
         ),
 

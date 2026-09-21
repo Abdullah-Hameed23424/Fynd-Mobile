@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/widgets/try_again.dart';
 import 'package:fynd/feature/home/presentation/cubit/home_cubit.dart';
 import 'package:fynd/feature/home/presentation/widgets/recent_post_card.dart';
@@ -26,8 +27,10 @@ class RecentPostsSection extends StatelessWidget {
         } else if (state is HomeLoaded) {
           final recentPosts = state.homeEntity.recentPosts;
           return SliverList.separated(
-            itemBuilder: (context, index) =>
-                RecentPostCard(recentPostEntity: recentPosts[index]),
+            itemBuilder: (context, index) => AnimatedItem(
+              index: index,
+              child: RecentPostCard(recentPostEntity: recentPosts[index]),
+            ),
             separatorBuilder: (context, index) => SizedBox(height: 14.h),
             itemCount: recentPosts.take(7).length,
           );

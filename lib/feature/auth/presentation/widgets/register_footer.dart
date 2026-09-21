@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fynd/core/animations/auth_animated_item.dart';
+import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/navigation/navigation_coordinator.dart';
 import 'package:fynd/core/navigation/route_arguments.dart';
@@ -46,7 +46,7 @@ class RegisterFooter extends StatelessWidget {
             if (state is RegisterLoading) {
               return const AppLoading();
             }
-            return AuthAnimatedItem(
+            return AnimatedItem(
               index: 9,
               child: CustomButton(
                 label: 'Create account',
@@ -66,7 +66,7 @@ class RegisterFooter extends StatelessWidget {
           },
         ),
         SizedBox(height: 12.h),
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 10,
           child: Text(
             'Use 8+ characters with letters and numbers',
@@ -76,7 +76,7 @@ class RegisterFooter extends StatelessWidget {
         ),
         SizedBox(height: 20.h),
 
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 11,
           child: Text.rich(
             TextSpan(
@@ -101,7 +101,7 @@ class RegisterFooter extends StatelessWidget {
 
         SizedBox(height: 75.h),
 
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 12,
           child: Text(
             'By creating an account, you agree to our Terms and Privacy Policy.',

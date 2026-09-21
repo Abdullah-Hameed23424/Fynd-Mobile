@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/navigation/navigation_coordinator.dart';
 import 'package:fynd/core/theme/app_colors.dart';
 import 'package:fynd/core/utils/validators/validators_barrel.dart';
-import 'package:fynd/core/animations/auth_animated_item.dart';
 import 'package:fynd/core/widgets/custom_text_field.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
 
@@ -65,14 +65,14 @@ class _LoginFormState extends State<LoginForm> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          AuthAnimatedItem(
+          AnimatedItem(
             index: 3,
             child: Text('Email', style: context.titleSmall12),
           ),
 
           SizedBox(height: 4.h),
 
-          AuthAnimatedItem(
+          AnimatedItem(
             index: 4,
             child: CustomTextField(
               controller: widget.emailController,
@@ -90,14 +90,14 @@ class _LoginFormState extends State<LoginForm> {
 
           SizedBox(height: 20.h),
 
-          AuthAnimatedItem(
+          AnimatedItem(
             index: 5,
             child: Text('Password', style: context.titleSmall12),
           ),
 
           SizedBox(height: 4.h),
 
-          AuthAnimatedItem(
+          AnimatedItem(
             index: 6,
             child: CustomTextField(
               controller: widget.passwordController,
@@ -114,7 +114,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
 
-          AuthAnimatedItem(
+          AnimatedItem(
             index: 7,
             child: Align(
               alignment: AlignmentDirectional.centerEnd,

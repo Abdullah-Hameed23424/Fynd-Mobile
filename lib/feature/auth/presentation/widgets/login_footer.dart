@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:fynd/core/animations/auth_animated_item.dart';
+import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/navigation/navigation_coordinator.dart';
 import 'package:fynd/core/navigation/route_arguments.dart';
@@ -43,7 +43,7 @@ class LoginFooter extends StatelessWidget {
             if (state is LoginLoading) {
               return const AppLoading();
             }
-            return AuthAnimatedItem(
+            return AnimatedItem(
               index: 8,
               child: CustomButton(
                 label: 'Sign In',
@@ -64,7 +64,7 @@ class LoginFooter extends StatelessWidget {
 
         SizedBox(height: 26.h),
 
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 9,
           child: Text(
             'OR',
@@ -77,7 +77,7 @@ class LoginFooter extends StatelessWidget {
 
         SizedBox(height: 20.h),
 
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 10,
           child: CustomButton(
             label: 'Continue with Google',
@@ -98,7 +98,7 @@ class LoginFooter extends StatelessWidget {
 
         SizedBox(height: 20.h),
 
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 11,
           child: Text.rich(
             TextSpan(
@@ -123,7 +123,7 @@ class LoginFooter extends StatelessWidget {
 
         SizedBox(height: 80.h),
 
-        AuthAnimatedItem(
+        AnimatedItem(
           index: 12,
           child: Text(
             'By continuing, you agree to our Terms and Privacy Policy.',

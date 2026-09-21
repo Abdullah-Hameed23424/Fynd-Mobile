@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fynd/core/animations/auth_animated_item.dart';
+import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/constants/app_images.dart';
 import 'package:fynd/core/di/auth_dependencies.dart';
 import 'package:fynd/core/widgets/pop_button.dart';
@@ -44,7 +44,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           bottom: PreferredSize(
             preferredSize: Size(double.infinity, 60.h),
             child: AppBar(
-              leading: AuthAnimatedItem(
+              leading: AnimatedItem(
                 index: 0,
                 child: Padding(
                   padding: EdgeInsets.only(left: 16.w),
@@ -56,7 +56,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 ),
               ),
               leadingWidth: 80.w,
-              title: const AuthAnimatedItem(index: 0, child: Text('Fynd')),
+              title: const AnimatedItem(index: 0, child: Text('Fynd')),
             ),
           ),
         ),

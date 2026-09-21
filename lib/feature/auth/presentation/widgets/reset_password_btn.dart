@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fynd/core/animations/auth_animated_item.dart';
+import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/navigation/navigation_coordinator.dart';
 import 'package:fynd/core/services/snackbar_service.dart';
 import 'package:fynd/core/widgets/app_loading.dart';
@@ -42,7 +42,7 @@ class ResetPasswordBtn extends StatelessWidget {
         if (state is ResetPasswordLoading) {
           return const AppLoading();
         }
-        return AuthAnimatedItem(
+        return AnimatedItem(
           index: 7,
           child: CustomButton(
             label: 'Reset',
