@@ -23,9 +23,9 @@ Future<void> _initializeServices() async {
 }
 
 void _logDebugInfo() async {
-  log('Token: ${await AppStorage.getToken}');
-  log('Has token: ${await AppStorage.hasToken}');
-  // AppStorage.removeToken();
+  log('Token: ${await AppStorage.getAccessToken}');
+  log('Has token: ${await AppStorage.hasAccessToken}');
+  // AppStorage.removeAccessToken();
 }
 
 class MyApp extends StatelessWidget {

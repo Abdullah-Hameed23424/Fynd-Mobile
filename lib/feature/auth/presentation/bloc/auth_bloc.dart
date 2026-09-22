@@ -37,8 +37,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       await loginUseCase(email: event.email, password: event.password);
 
+      if (isClosed) return;
       emit(LoginSuccess());
     } catch (e, s) {
+      if (isClosed) return;
       logApiName('_onLogin');
       emit(LoginError(msg: handleError(e, stackTrace: s)));
     }

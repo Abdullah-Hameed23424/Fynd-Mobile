@@ -1,6 +1,7 @@
-import 'package:fynd/Core/local_storage/flutter_secure_storage/app_storage.dart';
-import 'package:fynd/Core/navigation/navigation_coordinator.dart';
 import 'package:fynd/core/errors/error_handler/app_error_type.dart';
+import 'package:fynd/core/local_storage/flutter_secure_storage/app_storage.dart';
+import 'package:fynd/core/navigation/navigation_coordinator.dart';
+import 'package:fynd/core/network/network_client.dart';
 
 class ErrorSideEffects {
   static void handle(
@@ -10,9 +11,11 @@ class ErrorSideEffects {
   ) async {
     switch (type) {
       case AppErrorType.unauthorized:
-        if (await AppStorage.hasToken) {
-          AppStorage.removeToken();
-          NavigationCoordinator.toSplash();
+        if (await AppStorage.hasAccessToken) {
+          await AppStorage.removeAccessToken();
+          await AppStorage.removeRefreshToken();
+          NetworkClient.clearAuthToken();
+          NavigationCoordinator.toLogin();
         }
         break;
 

@@ -47,6 +47,11 @@ abstract class NavigationCoordinator {
     return NavigationService.navigateAndRemoveUntil(Routes.home);
   }
 
+  // ========== Posts ==========
+  static Future<dynamic>? toRecentPosts() {
+    return NavigationService.navigateTo(Routes.recentPosts);
+  }
+
   // ========== HELPER METHODS ==========
   static void goBack<T extends Object?>([T? result]) {
     NavigationService.goBack(result);

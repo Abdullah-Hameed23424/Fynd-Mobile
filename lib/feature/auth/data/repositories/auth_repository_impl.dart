@@ -16,8 +16,9 @@ class AuthRepositoryImpl implements AuthRepository {
     );
 
     final data = response.data;
-    await AppStorage.saveToken(data['token']);
-    NetworkClient.updateAuthToken(data['token']);
+    await AppStorage.saveAccessToken(data['accessToken']);
+    await AppStorage.saveRefreshToken(data['refreshToken']);
+    NetworkClient.updateAuthToken(data['accessToken']);
     await AppStorage.saveMyId(data['id']);
   }
 
@@ -34,8 +35,9 @@ class AuthRepositoryImpl implements AuthRepository {
     );
 
     final data = response.data;
-    await AppStorage.saveToken(data['token']);
-    NetworkClient.updateAuthToken(data['token']);
+    await AppStorage.saveAccessToken(data['accessToken']);
+    await AppStorage.saveRefreshToken(data['refreshToken']);
+    NetworkClient.updateAuthToken(data['accessToken']);
     await AppStorage.saveMyId(data['id']);
   }
 

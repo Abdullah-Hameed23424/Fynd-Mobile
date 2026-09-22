@@ -7,9 +7,13 @@ class ApiEndpoints {
   static const String forgetPassword = 'auth/forgot-password';
   static const String otp = 'auth/verify-otp';
   static const String resetPassword = 'auth/reset-password';
+  static const String refreshToken = 'auth/refresh';
 
-  /// [Auth]
+  /// [Home]
   static const String home = 'home';
+
+  /// [Posts]
+  static const String recentPosts = 'post/recent';
 
   static const String testEndpoint = 'test';
   static String testEndpointByAttribute({required Object id}) =>

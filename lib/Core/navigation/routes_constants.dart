@@ -12,4 +12,7 @@ abstract class Routes {
   // Home
   static const String navBar = '/navBar';
   static const String home = '/home';
+
+  // Posts
+  static const String recentPosts = '/recentPosts';
 }

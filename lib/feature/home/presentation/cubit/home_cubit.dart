@@ -16,8 +16,10 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       final HomeEntity homeEntity = await getHomeInfoUseCase();
 
+      if (isClosed) return;
       emit(HomeLoaded(homeEntity: homeEntity));
     } catch (e, s) {
+      if (isClosed) return;
       logApiName('getHomeInfo');
       emit(HomeError(msg: handleError(e, stackTrace: s)));
     }

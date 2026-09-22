@@ -1,6 +1,7 @@
 class AppConfig {
   // API Configuration
   static const String domain = 'http://fynd.runasp.net/';
+  // static const String domain = 'https://localhost:7050/';
   static const String baseUrl = '$domain/api/';
   static const String storageUrl = '$domain/storage/';
   static const int apiTimeout = 30; // seconds

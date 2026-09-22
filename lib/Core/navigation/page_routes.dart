@@ -4,6 +4,7 @@ import 'package:fynd/feature/auth/presentation/screens/Register_screen.dart';
 import 'package:fynd/feature/auth/presentation/screens/forget_password_screen.dart';
 import 'package:fynd/feature/auth/presentation/screens/login_screen.dart';
 import 'package:fynd/feature/home/presentation/screens/home_screen.dart';
+import 'package:fynd/feature/posts/presentation/screens/recent_posts_screen.dart';
 import 'package:fynd/feature/splash/presentation/screens/splash_screen.dart';
 
 abstract class PageRoutes {
@@ -15,6 +16,7 @@ abstract class PageRoutes {
       Routes.register: (_) => const RegisterScreen(),
       Routes.forgetPassword: (_) => const ForgetPasswordScreen(),
       Routes.home: (_) => const HomeScreen(),
+      Routes.recentPosts: (_) => const RecentPostsScreen(),
     };
   }
 

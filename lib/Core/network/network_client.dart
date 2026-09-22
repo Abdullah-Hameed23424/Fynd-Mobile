@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:fynd/core/config/app_config.dart';
 import 'package:fynd/core/local_storage/flutter_secure_storage/app_storage.dart';
 import 'package:fynd/core/local_storage/shared_preferences/app_shared_preferences.dart';
 
 import 'package:dio/dio.dart';
+import 'package:fynd/core/network/api_endpoints.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 /// [NetworkClient]
@@ -11,19 +14,29 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 /// Provides a centralized way to manage API communications
 class NetworkClient {
   static late Dio dio;
-  static late String? _token;
+  static Future<bool>? _refreshFuture;
+
+  static Future<bool> _refreshTokenOnce() {
+    if (_refreshFuture != null) {
+      return _refreshFuture!;
+    }
+
+    _refreshFuture = refreshAccessToken();
+
+    _refreshFuture!.whenComplete(() {
+      _refreshFuture = null;
+    });
+
+    return _refreshFuture!;
+  }
 
   /// Initialize the network client
   /// Should be called once at app startup
   static Future<void> init() async {
-    _token = await AppStorage.getToken;
     dio = Dio(
       BaseOptions(
         baseUrl: AppConfig.baseUrl,
         headers: {
-          if (_token != null && _token!.isNotEmpty)
-            'Authorization': 'Bearer $_token',
-          // 'Content-Type': 'application/json',
           'Accept': 'application/json',
           'Accept-Charset': 'application/json',
           'locale': AppSharedPreferences.getLocale,
@@ -33,7 +46,61 @@ class NetworkClient {
       ),
     );
 
-    // Add logging interceptor for debugging
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final token = await AppStorage.getAccessToken;
+
+          if (token != null && token.isNotEmpty) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
+
+          handler.next(options);
+        },
+
+        onError: (error, handler) async {
+          if (error.response?.statusCode != 401) {
+            handler.next(error);
+            return;
+          }
+
+          final request = error.requestOptions;
+
+          // Prevent infinite retry loop
+          if (request.extra['retried'] == true) {
+            handler.next(error);
+            return;
+          }
+
+          request.extra['retried'] = true;
+
+          final refreshed = await _refreshTokenOnce();
+
+          if (!refreshed) {
+            handler.next(error);
+            return;
+          }
+
+          final newAccessToken = await AppStorage.getAccessToken;
+
+          if (newAccessToken == null || newAccessToken.isEmpty) {
+            handler.next(error);
+            return;
+          }
+
+          request.headers['Authorization'] = 'Bearer $newAccessToken';
+
+          try {
+            final response = await dio.fetch(request);
+
+            handler.resolve(response);
+          } on DioException catch (e) {
+            handler.next(e);
+          }
+        },
+      ),
+    );
+
     dio.interceptors.add(
       PrettyDioLogger(
         requestHeader: false,
@@ -46,6 +113,54 @@ class NetworkClient {
         maxWidth: 1000,
       ),
     );
+  }
+
+  static Future<bool> refreshAccessToken() async {
+    log('Test Test');
+    final refreshToken = await AppStorage.getRefreshToken;
+
+    if (refreshToken == null || refreshToken.isEmpty) {
+      return false;
+    }
+
+    final refreshDio = Dio(
+      BaseOptions(
+        baseUrl: AppConfig.baseUrl,
+        headers: {
+          'Accept': 'application/json',
+          'Accept-Charset': 'application/json',
+          'locale': AppSharedPreferences.getLocale,
+        },
+        connectTimeout: const Duration(seconds: AppConfig.apiTimeout),
+        receiveTimeout: const Duration(seconds: AppConfig.apiTimeout),
+      ),
+    );
+
+    try {
+      final response = await refreshDio.post(
+        ApiEndpoints.refreshToken,
+        data: {'refreshToken': refreshToken},
+      );
+
+      final data = response.data;
+
+      final newAccessToken = data['accessToken'];
+      final newRefreshToken = data['refreshToken'];
+
+      if (newAccessToken == null || newRefreshToken == null) {
+        return false;
+      }
+
+      await AppStorage.saveAccessToken(newAccessToken);
+
+      await AppStorage.saveRefreshToken(newRefreshToken);
+
+      updateAuthToken(newAccessToken);
+
+      return true;
+    } on DioException {
+      return false;
+    }
   }
 
   /// Make a GET request
