@@ -76,6 +76,10 @@ class _LoginFormState extends State<LoginForm> {
             index: 4,
             child: CustomTextField(
               controller: widget.emailController,
+              prefixIcon: const Icon(
+                Icons.mail_outline,
+                color: AppColors.iconColor,
+              ),
               focusNode: _emailFocusNode,
               radius: 14.r,
               hintText: 'you@example.com',
@@ -88,7 +92,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: 14.h),
 
           AnimatedItem(
             index: 5,
@@ -101,6 +105,10 @@ class _LoginFormState extends State<LoginForm> {
             index: 6,
             child: CustomTextField(
               controller: widget.passwordController,
+              prefixIcon: const Icon(
+                Icons.lock_outline_rounded,
+                color: AppColors.iconColor,
+              ),
               focusNode: _passwordFocusNode,
               radius: 14.r,
               hintText: 'Enter your password',

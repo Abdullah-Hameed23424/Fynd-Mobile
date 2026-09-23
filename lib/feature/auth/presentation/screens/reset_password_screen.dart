@@ -6,6 +6,8 @@ import 'package:fynd/core/constants/app_images.dart';
 import 'package:fynd/core/di/auth_dependencies.dart';
 import 'package:fynd/core/widgets/pop_button.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:fynd/feature/auth/presentation/widgets/auth_card.dart';
+import 'package:fynd/feature/auth/presentation/widgets/password_info_card.dart';
 import 'package:fynd/feature/auth/presentation/widgets/reset_password_btn.dart';
 import 'package:fynd/feature/auth/presentation/widgets/reset_password_form.dart';
 import 'package:fynd/feature/auth/presentation/widgets/title_and_description.dart';
@@ -45,17 +47,25 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       create: (context) => createAuthBloc(),
       child: Scaffold(
         appBar: AppBar(
-          leading: const PopButton(),
-          bottom: AppBar(
-            leading: AnimatedItem(
-              index: 0,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4.h),
-                child: Image.asset(AppImages.appLogo),
+          leadingWidth: 110.w,
+          leading: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const PopButton(),
+              AnimatedItem(
+                index: 0,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 8.w),
+                  child: Image.asset(
+                    AppImages.appLogo,
+                    width: 45.w,
+                    height: 45.h,
+                  ),
+                ),
               ),
-            ),
-            title: const AnimatedItem(index: 0, child: Text('Fynd')),
+            ],
           ),
+          title: const AnimatedItem(index: 0, child: Text('Fynd')),
         ),
 
         body: LayoutBuilder(
@@ -71,29 +81,36 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     ),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(height: 32.h),
+                        AuthCard(
+                          children: <Widget>[
+                            const TitleAndDescription(
+                              title: 'Reset your password',
+                              description: 'Enter and confirm the password',
+                            ),
 
-                        const TitleAndDescription(
-                          title: 'Reset your password',
-                          description: 'Enter and confirm the password',
+                            SizedBox(height: 18.h),
+                            ResetPasswordForm(
+                              resetToken: widget.resetToken,
+                              resetPasswordKey: _resetPasswordKey,
+                              passwordController: _passwordController,
+                              confirmPasswordController:
+                                  _confirmPasswordController,
+                            ),
+                            SizedBox(height: 14.h),
+
+                            ResetPasswordBtn(
+                              resetPasswordKey: _resetPasswordKey,
+                              widget: widget,
+                              passwordController: _passwordController,
+                              confirmPasswordController:
+                                  _confirmPasswordController,
+                            ),
+                          ],
                         ),
-
-                        SizedBox(height: 28.h),
-
-                        ResetPasswordForm(
-                          resetToken: widget.resetToken,
-                          resetPasswordKey: _resetPasswordKey,
-                          passwordController: _passwordController,
-                          confirmPasswordController: _confirmPasswordController,
-                        ),
-
-                        SizedBox(height: 100.h),
-
-                        ResetPasswordBtn(
-                          resetPasswordKey: _resetPasswordKey,
-                          widget: widget,
-                          passwordController: _passwordController,
-                          confirmPasswordController: _confirmPasswordController,
+                        SizedBox(height: 14.h),
+                        const PasswordInfoCard(
+                          animationIndex: 8,
+                          color: Colors.white,
                         ),
                       ],
                     ),

@@ -8,6 +8,7 @@ import 'package:fynd/core/navigation/route_arguments.dart';
 import 'package:fynd/core/theme/app_colors.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/feature/splash/domain/usecases/check_auth_status_use_case.dart';
+import 'package:fynd/feature/splash/domain/usecases/first_time_use_use_case.dart';
 import 'package:fynd/feature/splash/presentation/cubits/splash_cubit.dart';
 import 'package:fynd/feature/splash/presentation/cubits/splash_state.dart';
 
@@ -23,9 +24,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return BlocProvider<SplashCubit>(
       create: (context) =>
-          SplashCubit(CheckAuthStatusUseCase())..checkUserStatus(),
+          SplashCubit(FirstTimeUseUseCase(), CheckAuthStatusUseCase())
+            ..checkUserStatus(),
       child: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
+          if (state is SplashFirstTime) {
+            NavigationCoordinator.toGetStart();
+          }
           if (state is SplashAuthenticated) {
             NavigationCoordinator.toNavBar(args: NavBarArguments(index: 0));
           }

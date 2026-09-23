@@ -7,52 +7,18 @@ import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/services/snackbar_service.dart';
 import 'package:fynd/core/utils/custom_timer.dart';
 import 'package:fynd/core/widgets/app_loading.dart';
-import 'package:fynd/core/widgets/custom_button.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
 
 class OtpFooter extends StatelessWidget {
   final CustomTimer timer;
   final String email;
-  final TextEditingController otpController;
-  const OtpFooter({
-    super.key,
-    required this.timer,
-    required this.email,
-    required this.otpController,
-  });
+  const OtpFooter({super.key, required this.timer, required this.email});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        BlocBuilder<AuthBloc, AuthState>(
-          builder: (context, state) {
-            if (state is VerifyOtpLoading) {
-              return const AppLoading();
-            }
-            return AnimatedItem(
-              index: 4,
-              child: CustomButton(
-                label: 'Send',
-                onPressed: () {
-                  // if (!loginKey.currentState!.validate())
-                  //   return;
-                  context.read<AuthBloc>().add(
-                    VerifyOtpEvent(
-                      email: email,
-                      otp: otpController.text.trim(),
-                    ),
-                  );
-                },
-                radius: 14.r,
-              ),
-            );
-          },
-        ),
-
-        SizedBox(height: 28.h),
-
         AnimatedItem(
           index: 5,
           child: ValueListenableBuilder<int>(

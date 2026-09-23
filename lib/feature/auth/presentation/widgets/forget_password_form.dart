@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
+import 'package:fynd/core/theme/app_colors.dart';
 import 'package:fynd/core/utils/validators/validators_barrel.dart';
 import 'package:fynd/core/widgets/custom_text_field.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
@@ -51,6 +52,10 @@ class _ForgetPasswordFormState extends State<ForgetPasswordForm> {
             index: 4,
             child: CustomTextField(
               controller: widget.emailController,
+              prefixIcon: const Icon(
+                Icons.mail_outline,
+                color: AppColors.iconColor,
+              ),
               radius: 14.r,
               hintText: 'you@example.com',
               keyboardType: TextInputType.emailAddress,

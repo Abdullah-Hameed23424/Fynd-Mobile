@@ -26,6 +26,7 @@ void _logDebugInfo() async {
   log('Token: ${await AppStorage.getAccessToken}');
   log('Has token: ${await AppStorage.hasAccessToken}');
   // AppStorage.removeAccessToken();
+  // AppSharedPreferences.removeFirstTime();
 }
 
 class MyApp extends StatelessWidget {

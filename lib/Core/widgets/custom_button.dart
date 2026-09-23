@@ -34,35 +34,47 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      iconAlignment: IconAlignment.start,
-      icon: icon,
-      label: Text(
-        textAlign: TextAlign.center,
-        label,
-        style:
-            buttonStyle ??
-            context.bodyMedium16.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: <Color>[Color(0xff2563EB), Color(0xff8B5CF6)],
+          begin: AlignmentGeometry.topLeft,
+          end: AlignmentGeometry.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(
+          Dimensions.autoSize(radius ?? Dimensions.autoSize(50)),
+        ),
       ),
-      onPressed: isEnabled ? onPressed : null,
-      style: ElevatedButton.styleFrom(
-        shadowColor: shadowColor,
-        animationDuration: const Duration(milliseconds: 300),
-        elevation: elevation,
-        minimumSize:
-            size ??
-            Size(MediaQuery.sizeOf(context).width, Dimensions.autoSize(58)),
-        backgroundColor: backgroundColor ?? AppColors.primary,
-        surfaceTintColor: AppColors.primary,
-        disabledBackgroundColor: const Color(0XFFAEAEEA),
-        padding: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          side: border ?? BorderSide.none,
-          borderRadius: BorderRadius.circular(
-            Dimensions.autoSize(radius ?? Dimensions.autoSize(50)),
+      child: ElevatedButton.icon(
+        iconAlignment: IconAlignment.start,
+        icon: icon,
+        label: Text(
+          textAlign: TextAlign.center,
+          label,
+          style:
+              buttonStyle ??
+              context.bodyMedium16.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        onPressed: isEnabled ? onPressed : null,
+        style: ElevatedButton.styleFrom(
+          shadowColor: shadowColor,
+          animationDuration: const Duration(milliseconds: 300),
+          elevation: elevation,
+          minimumSize:
+              size ??
+              Size(MediaQuery.sizeOf(context).width, Dimensions.autoSize(58)),
+          backgroundColor: backgroundColor ?? AppColors.primary,
+          surfaceTintColor: AppColors.primary,
+          disabledBackgroundColor: const Color(0XFFAEAEEA),
+          padding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            side: border ?? BorderSide.none,
+            borderRadius: BorderRadius.circular(
+              Dimensions.autoSize(radius ?? Dimensions.autoSize(50)),
+            ),
           ),
         ),
       ),

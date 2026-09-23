@@ -3,21 +3,13 @@ import 'package:fynd/core/local_storage/shared_preferences/helper/cache_helper.d
 /// [AppSharedPreferences]
 /// A helper class for managing application-specific shared preferences.
 class AppSharedPreferences {
-  /// [token]
-  static String token = 'token';
-  static String get getToken => CacheHelper.getData(key: token) ?? 'no token';
-  static saveToken(String value) =>
-      CacheHelper.saveData(key: token, value: value);
-  static bool get hasToken => CacheHelper.contains(token);
-  static Future<void> removeToken() async =>
-      await CacheHelper.removeData(key: token);
-
-  /// [uid]
-  static String uid = 'uid';
-  static int get getMyId => CacheHelper.getData(key: uid) ?? 0;
-  static saveMyId(int value) => CacheHelper.saveData(key: uid, value: value);
-  static bool get hasMyId => CacheHelper.contains(uid);
-  static void removeMyId() => CacheHelper.removeData(key: uid);
+  /// [FirstTime]
+  static const String firstTime = 'firstTime';
+  static bool get getFirstTime => CacheHelper.getData(key: firstTime) ?? true;
+  static Future<bool> saveFirstTime(bool value) =>
+      CacheHelper.saveData(key: firstTime, value: value);
+  static bool get hasFirstTime => CacheHelper.contains(firstTime);
+  static void removeFirstTime() => CacheHelper.removeData(key: firstTime);
 
   /// [temp]
   static const String locale = 'locale';

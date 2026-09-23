@@ -5,9 +5,10 @@ import 'package:fynd/core/theme/app_typography.dart';
 class AppTheme {
   static ThemeData lightTheme(BuildContext context) {
     return ThemeData(
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: const Color(0xffF8FAFC),
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xffF8FAFC),
+        surfaceTintColor: const Color(0xffF8FAFC),
         titleTextStyle: AppTypography.titleLarge,
       ),
       fontFamily: AppConfig.defaultFontFamily,

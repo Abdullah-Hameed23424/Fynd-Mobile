@@ -1,73 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/navigation/navigation_coordinator.dart';
-import 'package:fynd/core/navigation/route_arguments.dart';
-import 'package:fynd/core/services/snackbar_service.dart';
 import 'package:fynd/core/theme/app_colors.dart';
-import 'package:fynd/core/widgets/app_loading.dart';
-import 'package:fynd/core/widgets/custom_button.dart';
-import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
 
 class ForgetPasswordFooter extends StatelessWidget {
-  final GlobalKey<FormState> forgetPasswordKey;
-  final TextEditingController emailController;
-  const ForgetPasswordFooter({
-    super.key,
-    required this.forgetPasswordKey,
-    required this.emailController,
-  });
+  const ForgetPasswordFooter({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        BlocConsumer<AuthBloc, AuthState>(
-          listener: (context, state) {
-            if (state is ForgetPasswordSuccess) {
-              NavigationCoordinator.toOtp(
-                args: OtpArguments(email: emailController.text.trim()),
-              );
-              snackBarService.showSuccess(
-                message:
-                    'The verification code (OTP) has been sent successfully',
-              );
-            } else if (state is ForgetPasswordError) {
-              snackBarService.showError(message: state.msg);
-            }
-          },
-          builder: (context, state) {
-            if (state is ForgetPasswordLoading) {
-              return const AppLoading();
-            }
-            return AnimatedItem(
-              index: 5,
-              child: CustomButton(
-                label: 'Send reset link',
-                onPressed: () {
-                  if (!forgetPasswordKey.currentState!.validate()) return;
-                  context.read<AuthBloc>().add(
-                    ForgetPasswordEvent(email: emailController.text.trim()),
-                  );
-                },
-                radius: 14.r,
-              ),
-            );
-          },
-        ),
-
-        SizedBox(height: 30.h),
-
         AnimatedItem(
           index: 6,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 16.h),
             decoration: BoxDecoration(
               color: AppColors.primaryLight,
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(22.r),
+              border: Border.all(color: const Color(0xffD6E4FF)),
             ),
             child: Row(
               children: <Widget>[
@@ -75,9 +28,8 @@ class ForgetPasswordFooter extends StatelessWidget {
                   radius: 17.5.r,
                   backgroundColor: AppColors.primary,
                   child: Icon(
-                    Icons.done,
+                    Icons.shield_outlined,
                     size: 20.sp,
-                    fontWeight: FontWeight.bold,
                     color: AppColors.white,
                   ),
                 ),
@@ -107,7 +59,7 @@ class ForgetPasswordFooter extends StatelessWidget {
           ),
         ),
 
-        SizedBox(height: 56.h),
+        SizedBox(height: 18.h),
 
         AnimatedItem(
           index: 7,

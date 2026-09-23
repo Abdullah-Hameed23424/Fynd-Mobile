@@ -1,6 +1,7 @@
 abstract class Routes {
   // Splash
   static const String splash = '/';
+  static const String getStart = '/getStart';
 
   // Auth
   static const String login = '/login';

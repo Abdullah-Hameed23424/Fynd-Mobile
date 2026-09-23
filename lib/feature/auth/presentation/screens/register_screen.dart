@@ -5,6 +5,8 @@ import 'package:fynd/core/constants/app_images.dart';
 import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/di/auth_dependencies.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:fynd/feature/auth/presentation/widgets/auth_card.dart';
+import 'package:fynd/feature/auth/presentation/widgets/register_btn.dart';
 import 'package:fynd/feature/auth/presentation/widgets/register_footer.dart';
 import 'package:fynd/feature/auth/presentation/widgets/register_form.dart';
 import 'package:fynd/feature/auth/presentation/widgets/title_and_description.dart';
@@ -49,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             index: 0,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 4.h),
-              child: Image.asset(AppImages.appLogo),
+              child: Image.asset(AppImages.appLogo, width: 45.w, height: 45.w),
             ),
           ),
           title: const AnimatedItem(index: 0, child: Text('Fynd')),
@@ -69,30 +71,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 32.h),
+                        AuthCard(
+                          children: <Widget>[
+                            const TitleAndDescription(
+                              title: 'Create your account',
+                              description:
+                                  'Join your community and help reunite lost items',
+                            ),
 
-                        const TitleAndDescription(
-                          title: 'Create your account',
-                          description:
-                              'Join your community and help reunite lost items',
-                        ),
-
-                        SizedBox(height: 28.h),
-
-                        RegisterForm(
-                          registerKey: _registerKey,
-                          fullnameController: _fullnameController,
-                          emailController: _emailController,
-                          passwordController: _passwordController,
+                            SizedBox(height: 18.h),
+                            RegisterForm(
+                              registerKey: _registerKey,
+                              fullnameController: _fullnameController,
+                              emailController: _emailController,
+                              passwordController: _passwordController,
+                            ),
+                            SizedBox(height: 14.h),
+                            RegisterBtn(
+                              registerKey: _registerKey,
+                              fullnameController: _fullnameController,
+                              emailController: _emailController,
+                              passwordController: _passwordController,
+                            ),
+                          ],
                         ),
 
                         SizedBox(height: 20.h),
-                        RegisterFooter(
-                          registerKey: _registerKey,
-                          fullnameController: _fullnameController,
-                          emailController: _emailController,
-                          passwordController: _passwordController,
-                        ),
+                        const RegisterFooter(),
                       ],
                     ),
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
+import 'package:fynd/core/theme/app_colors.dart';
 import 'package:fynd/core/utils/validators/fullname_validator.dart';
 import 'package:fynd/core/utils/validators/validators_barrel.dart';
 import 'package:fynd/core/animations/animated_item.dart';
@@ -77,6 +78,10 @@ class _RegisterFormState extends State<RegisterForm> {
           AnimatedItem(
             index: 4,
             child: CustomTextField(
+              prefixIcon: const Icon(
+                Icons.person_2_outlined,
+                color: AppColors.iconColor,
+              ),
               controller: widget.fullnameController,
               focusNode: _fullnameFocusNode,
               radius: 14.r,
@@ -90,7 +95,7 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: 14.h),
           AnimatedItem(
             index: 5,
             child: Text('Email', style: context.titleSmall12),
@@ -100,6 +105,10 @@ class _RegisterFormState extends State<RegisterForm> {
             index: 6,
             child: CustomTextField(
               controller: widget.emailController,
+              prefixIcon: const Icon(
+                Icons.mail_outlined,
+                color: AppColors.iconColor,
+              ),
               focusNode: _emailFocusNode,
               radius: 14.r,
               hintText: 'you@example.com',
@@ -112,7 +121,7 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: 14.h),
 
           AnimatedItem(
             index: 7,
@@ -123,6 +132,10 @@ class _RegisterFormState extends State<RegisterForm> {
             index: 8,
             child: CustomTextField(
               controller: widget.passwordController,
+              prefixIcon: const Icon(
+                Icons.lock_outline_rounded,
+                color: AppColors.iconColor,
+              ),
               focusNode: _passwordFocusNode,
               radius: 14.r,
               hintText: 'Create a strong password',

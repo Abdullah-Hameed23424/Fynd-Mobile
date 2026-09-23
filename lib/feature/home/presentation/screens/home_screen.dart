@@ -59,6 +59,25 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           toolbarHeight: 100.h,
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: Badge(
+                child: IconButton(
+                  icon: const Icon(Icons.notifications_outlined),
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    fixedSize: Size(44.w, 44.w),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(14.r),
+                      side: const BorderSide(color: Color(0xffE0E5ED)),
+                    ),
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+          ],
         ),
 
         body: Padding(

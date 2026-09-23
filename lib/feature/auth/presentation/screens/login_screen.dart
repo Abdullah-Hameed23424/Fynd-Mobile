@@ -5,6 +5,8 @@ import 'package:fynd/core/constants/app_images.dart';
 import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/di/auth_dependencies.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:fynd/feature/auth/presentation/widgets/auth_card.dart';
+import 'package:fynd/feature/auth/presentation/widgets/login_btns.dart';
 import 'package:fynd/feature/auth/presentation/widgets/login_footer.dart';
 import 'package:fynd/feature/auth/presentation/widgets/login_form.dart';
 import 'package:fynd/feature/auth/presentation/widgets/title_and_description.dart';
@@ -46,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
             index: 0,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 4.h),
-              child: Image.asset(AppImages.appLogo),
+              child: Image.asset(AppImages.appLogo, width: 45.w, height: 45.w),
             ),
           ),
           title: const AnimatedItem(index: 0, child: Text('Fynd')),
@@ -66,27 +68,32 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 32.h),
+                        AuthCard(
+                          children: <Widget>[
+                            const TitleAndDescription(
+                              title: 'Welcome back',
+                              description: 'Sign in to find or return an item',
+                            ),
 
-                        const TitleAndDescription(
-                          title: 'Welcome back',
-                          description: 'Sign in to find or return an item',
-                        ),
+                            SizedBox(height: 28.h),
 
-                        SizedBox(height: 28.h),
+                            LoginForm(
+                              loginKey: _loginKey,
+                              emailController: _emailController,
+                              passwordController: _passwordController,
+                            ),
 
-                        LoginForm(
-                          loginKey: _loginKey,
-                          emailController: _emailController,
-                          passwordController: _passwordController,
+                            SizedBox(height: 14.h),
+                            LoginBtns(
+                              loginKey: _loginKey,
+                              emailController: _emailController,
+                              passwordController: _passwordController,
+                            ),
+                          ],
                         ),
 
                         SizedBox(height: 20.h),
-                        LoginFooter(
-                          loginKey: _loginKey,
-                          emailController: _emailController,
-                          passwordController: _passwordController,
-                        ),
+                        const LoginFooter(),
                       ],
                     ),
                   ),

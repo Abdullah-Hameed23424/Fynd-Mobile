@@ -38,7 +38,7 @@ class BrowseCategoriesSection extends StatelessWidget {
                     width: 78.w,
                     height: 44.h,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14.r),
+                      borderRadius: BorderRadius.circular(16.r),
                       border: Border.all(color: const Color(0xffE0E5ED)),
                     ),
                     alignment: Alignment.center,

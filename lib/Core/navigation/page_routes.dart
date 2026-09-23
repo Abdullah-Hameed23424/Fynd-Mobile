@@ -5,6 +5,7 @@ import 'package:fynd/feature/auth/presentation/screens/forget_password_screen.da
 import 'package:fynd/feature/auth/presentation/screens/login_screen.dart';
 import 'package:fynd/feature/home/presentation/screens/home_screen.dart';
 import 'package:fynd/feature/posts/presentation/screens/recent_posts_screen.dart';
+import 'package:fynd/feature/splash/presentation/screens/get_start_screen.dart';
 import 'package:fynd/feature/splash/presentation/screens/splash_screen.dart';
 
 abstract class PageRoutes {
@@ -12,6 +13,7 @@ abstract class PageRoutes {
   static Map<String, WidgetBuilder> getRoutes() {
     return {
       Routes.splash: (_) => const SplashScreen(),
+      Routes.getStart: (_) => const GetStartScreen(),
       Routes.login: (_) => const LoginScreen(),
       Routes.register: (_) => const RegisterScreen(),
       Routes.forgetPassword: (_) => const ForgetPasswordScreen(),

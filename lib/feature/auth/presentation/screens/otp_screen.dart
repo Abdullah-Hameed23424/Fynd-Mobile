@@ -10,6 +10,8 @@ import 'package:fynd/core/services/snackbar_service.dart';
 import 'package:fynd/core/utils/custom_timer.dart';
 import 'package:fynd/core/widgets/pop_button.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:fynd/feature/auth/presentation/widgets/auth_card.dart';
+import 'package:fynd/feature/auth/presentation/widgets/otp_btn.dart';
 import 'package:fynd/feature/auth/presentation/widgets/otp_footer.dart';
 import 'package:fynd/feature/auth/presentation/widgets/otp_pinput.dart';
 import 'package:fynd/feature/auth/presentation/widgets/title_and_description.dart';
@@ -23,13 +25,11 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  late final GlobalKey<FormState> _otpKey;
   late final TextEditingController _otpController;
   late final CustomTimer _timer;
 
   @override
   void initState() {
-    _otpKey = GlobalKey<FormState>();
     _otpController = TextEditingController();
     _timer = CustomTimer(initialSeconds: 59);
     _timer.start(59);
@@ -49,17 +49,25 @@ class _OtpScreenState extends State<OtpScreen> {
       create: (context) => createAuthBloc(),
       child: Scaffold(
         appBar: AppBar(
-          leading: const PopButton(),
-          bottom: AppBar(
-            leading: AnimatedItem(
-              index: 0,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4.h),
-                child: Image.asset(AppImages.appLogo),
+          leadingWidth: 110.w,
+          leading: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const PopButton(),
+              AnimatedItem(
+                index: 0,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 8.w),
+                  child: Image.asset(
+                    AppImages.appLogo,
+                    width: 45.w,
+                    height: 45.h,
+                  ),
+                ),
               ),
-            ),
-            title: const AnimatedItem(index: 0, child: Text('Fynd')),
+            ],
           ),
+          title: const AnimatedItem(index: 0, child: Text('Fynd')),
         ),
 
         body: LayoutBuilder(
@@ -93,38 +101,43 @@ class _OtpScreenState extends State<OtpScreen> {
                         children: <Widget>[
                           SizedBox(height: 32.h),
 
-                          const TitleAndDescription(
-                            title: 'Verify Your Code',
-                            description:
-                                'Enter the verification code sent to your email to reset your password',
-                          ),
+                          AuthCard(
+                            children: <Widget>[
+                              const TitleAndDescription(
+                                title: 'Verify Your Code',
+                                description:
+                                    'Enter the verification code sent to your email to reset your password',
+                              ),
+                              SizedBox(height: 28.h),
 
-                          SizedBox(height: 28.h),
-
-                          Builder(
-                            builder: (context) {
-                              return OtpPinput(
-                                enable: true,
-                                otpController: _otpController,
-                                onCompleted: (code) {
-                                  context.read<AuthBloc>().add(
-                                    VerifyOtpEvent(
-                                      email: widget.email,
-                                      otp: _otpController.text.trim(),
-                                    ),
+                              Builder(
+                                builder: (context) {
+                                  return OtpPinput(
+                                    enable: true,
+                                    otpController: _otpController,
+                                    onCompleted: (code) {
+                                      context.read<AuthBloc>().add(
+                                        VerifyOtpEvent(
+                                          email: widget.email,
+                                          otp: _otpController.text.trim(),
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
-                              );
-                            },
+                              ),
+
+                              SizedBox(height: 72.h),
+                              OtpBtn(
+                                email: widget.email,
+                                otpController: _otpController,
+                              ),
+                            ],
                           ),
 
-                          SizedBox(height: 100.h),
+                          SizedBox(height: 14.h),
 
-                          OtpFooter(
-                            timer: _timer,
-                            email: widget.email,
-                            otpController: _otpController,
-                          ),
+                          OtpFooter(timer: _timer, email: widget.email),
                         ],
                       ),
                     ),

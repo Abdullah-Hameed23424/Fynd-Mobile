@@ -18,6 +18,12 @@ class PopButton extends StatelessWidget {
         hoverColor: Colors.transparent,
         highlightColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
+        backgroundColor: Colors.white,
+        fixedSize: Size(44.w, 44.w),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(14.r),
+          side: const BorderSide(color: Color(0xffE0E5ED)),
+        ),
       ),
       icon: Icon(Icons.arrow_back_ios_rounded, color: color, size: 20.sp),
       onPressed: () {

@@ -6,6 +6,8 @@ import 'package:fynd/core/constants/app_images.dart';
 import 'package:fynd/core/di/auth_dependencies.dart';
 import 'package:fynd/core/widgets/pop_button.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:fynd/feature/auth/presentation/widgets/auth_card.dart';
+import 'package:fynd/feature/auth/presentation/widgets/forget_password_btn.dart';
 import 'package:fynd/feature/auth/presentation/widgets/forget_password_form.dart';
 import 'package:fynd/feature/auth/presentation/widgets/forget_password_footer.dart';
 import 'package:fynd/feature/auth/presentation/widgets/title_and_description.dart';
@@ -40,25 +42,25 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       create: (context) => createAuthBloc(),
       child: Scaffold(
         appBar: AppBar(
-          leading: const PopButton(),
-          bottom: PreferredSize(
-            preferredSize: Size(double.infinity, 60.h),
-            child: AppBar(
-              leading: AnimatedItem(
+          leadingWidth: 110.w,
+          leading: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const PopButton(),
+              AnimatedItem(
                 index: 0,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 16.w),
+                  padding: EdgeInsets.only(left: 8.w),
                   child: Image.asset(
                     AppImages.appLogo,
-                    width: 50.w,
-                    height: 50.h,
+                    width: 45.w,
+                    height: 45.h,
                   ),
                 ),
               ),
-              leadingWidth: 80.w,
-              title: const AnimatedItem(index: 0, child: Text('Fynd')),
-            ),
+            ],
           ),
+          title: const AnimatedItem(index: 0, child: Text('Fynd')),
         ),
         body: LayoutBuilder(
           builder: (context, constraints) {
@@ -73,27 +75,33 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     ),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(height: 32.h),
+                        AuthCard(
+                          children: <Widget>[
+                            const TitleAndDescription(
+                              title: 'Forget Password',
+                              description:
+                                  'Enter your email address, and we will send a verification code (OTP)',
+                            ),
 
-                        const TitleAndDescription(
-                          title: 'Forget Password',
-                          description:
-                              'Enter your email address, and we will send a verification code (OTP)',
+                            SizedBox(height: 18.h),
+
+                            ForgetPasswordForm(
+                              forgetPasswordKey: _forgetPasswordKey,
+                              emailController: _emailController,
+                            ),
+
+                            SizedBox(height: 14.h),
+
+                            ForgetPasswordBtn(
+                              forgetPasswordKey: _forgetPasswordKey,
+                              emailController: _emailController,
+                            ),
+                          ],
                         ),
 
-                        SizedBox(height: 28.h),
+                        SizedBox(height: 18.h),
 
-                        ForgetPasswordForm(
-                          forgetPasswordKey: _forgetPasswordKey,
-                          emailController: _emailController,
-                        ),
-
-                        SizedBox(height: 26.h),
-
-                        ForgetPasswordFooter(
-                          forgetPasswordKey: _forgetPasswordKey,
-                          emailController: _emailController,
-                        ),
+                        const ForgetPasswordFooter(),
                       ],
                     ),
                   ),

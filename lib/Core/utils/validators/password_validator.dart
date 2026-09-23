@@ -3,11 +3,12 @@ import 'package:fynd/core/local_storage/shared_preferences/app_shared_preference
 const Map<String, Map<String, String>> passwordMessages = {
   'ar': {
     'field_required': 'كلمة المرور لا يمكن أن تكون فارغة.',
-    'password_min_length': 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.',
+    'password_invalid':
+        'كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل، وتتضمن أحرفًا وأرقامًا.',
   },
   'en': {
-    'field_required': 'cannot be empty',
-    'password_min_length': 'must be at least 8 characters',
+    'field_required': 'Password cannot be empty',
+    'password_invalid': 'Use 8+ characters with letters and numbers',
   },
 };
 
@@ -18,8 +19,14 @@ class PasswordValidator {
 
     if (value == null || value.isEmpty) {
       return passwordMessages[locale]!['field_required'];
-    } else if (value.length < 8) {
-      return passwordMessages[locale]!['password_min_length'];
+    }
+
+    final bool hasMinLength = value.length >= 8;
+    final bool hasLetter = RegExp(r'[A-Za-z]').hasMatch(value);
+    final bool hasNumber = RegExp(r'\d').hasMatch(value);
+
+    if (!hasMinLength || !hasLetter || !hasNumber) {
+      return passwordMessages[locale]!['password_invalid'];
     }
 
     return null;

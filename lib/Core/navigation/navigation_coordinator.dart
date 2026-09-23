@@ -12,6 +12,10 @@ abstract class NavigationCoordinator {
     return NavigationService.navigateAndRemoveUntil(Routes.splash);
   }
 
+  static Future<dynamic>? toGetStart() {
+    return NavigationService.navigateAndRemoveUntil(Routes.getStart);
+  }
+
   // ========== Auth ==========
   static Future<dynamic>? toLogin() {
     return NavigationService.navigateAndRemoveUntil(Routes.login);
