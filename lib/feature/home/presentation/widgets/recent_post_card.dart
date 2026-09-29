@@ -5,10 +5,10 @@ import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/theme/app_colors.dart';
 import 'package:fynd/core/utils/time_formatter.dart';
 import 'package:fynd/core/widgets/custom_post_badge.dart';
-import 'package:fynd/feature/home/domain/entities/recent_post_entity.dart';
+import 'package:fynd/feature/posts/domain/entities/post_entity.dart';
 
 class RecentPostCard extends StatelessWidget {
-  final RecentPostEntity recentPostEntity;
+  final PostEntity recentPostEntity;
   const RecentPostCard({super.key, required this.recentPostEntity});
 
   @override
@@ -65,7 +65,7 @@ class RecentPostCard extends StatelessWidget {
                         const TextSpan(text: ' · \n'),
                         TextSpan(
                           text: TimeFormatter.format(
-                            recentPostEntity.createdAt ?? DateTime.now(),
+                            recentPostEntity.date ?? DateTime.now(),
                           ),
                         ),
                       ],

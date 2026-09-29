@@ -14,6 +14,9 @@ class ApiEndpoints {
 
   /// [Posts]
   static const String recentPosts = 'post/recent';
+  static const String posts = 'post/all';
+  static const String categories = 'category';
+  static const String createPost = 'post/create';
 
   static const String testEndpoint = 'test';
   static String testEndpointByAttribute({required Object id}) =>

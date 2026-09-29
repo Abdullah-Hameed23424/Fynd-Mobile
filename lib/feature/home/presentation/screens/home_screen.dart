@@ -5,6 +5,7 @@ import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/di/home_dependencies.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/navigation/navigation_coordinator.dart';
+import 'package:fynd/core/navigation/route_arguments.dart';
 import 'package:fynd/core/theme/app_colors.dart';
 import 'package:fynd/core/widgets/custom_text_field.dart';
 import 'package:fynd/feature/home/presentation/cubit/home_cubit.dart';
@@ -53,7 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   radius: 14.r,
                   hintText: 'Search lost or found items…',
                   keyboardType: TextInputType.text,
-                  onFieldSubmitted: (value) {},
+                  onTap: () {
+                    NavigationCoordinator.toNavBar(
+                      args: NavBarArguments(index: 1),
+                    );
+                  },
                 ),
               ),
             ),

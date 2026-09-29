@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/feature/home/presentation/screens/home_screen.dart';
+import 'package:fynd/feature/posts/presentation/screens/create_post_screen.dart';
+import 'package:fynd/feature/posts/presentation/screens/posts_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class NavBarScreen extends StatelessWidget {
@@ -12,8 +14,8 @@ class NavBarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screens = [
       const HomeScreen(),
-      const Center(child: Text('Search')),
-      const Center(child: Text('Favorites')),
+      const PostsScreen(),
+      const CreatePostScreen(),
       const Center(child: Text('My Posts')),
       const Center(child: Text('Profile')),
     ];
@@ -24,15 +26,15 @@ class NavBarScreen extends StatelessWidget {
 
       items: [
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.home),
+          icon: const Icon(Icons.home_outlined),
           title: 'Home',
           activeColorPrimary: Colors.blue,
           inactiveColorPrimary: Colors.grey,
         ),
 
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.search),
-          title: 'Search',
+          icon: const Icon(Icons.article_outlined),
+          title: 'Posts',
           activeColorPrimary: Colors.blue,
           inactiveColorPrimary: Colors.grey,
         ),
