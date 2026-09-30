@@ -45,4 +45,24 @@ class PostsRepositoryImpl implements PostsRepository {
   Future<void> createPost({required Map<String, dynamic> data}) async {
     await remoteDataSource.createPost(data: data);
   }
+
+  @override
+  Future<PostResponseEntity> getMyPosts() async {
+    final response = await remoteDataSource.getMyPosts();
+
+    return PostResponseModel.fromMap(response.data);
+  }
+
+  @override
+  Future<PostEntity> getPostDetails({
+    required int postId,
+    required int postType,
+  }) async {
+    final response = await remoteDataSource.getPostDetails(
+      postId: postId,
+      postType: postType,
+    );
+
+    return PostModel.fromMap(response.data);
+  }
 }

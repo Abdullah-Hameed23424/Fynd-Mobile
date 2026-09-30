@@ -27,6 +27,8 @@ dependencies:
   persistent_bottom_nav_bar: ^6.2.1
   shimmer: ^3.0.0
   pull_to_refresh: ^2.0.0
+  intl: ^0.20.3
+  easy_url_launcher: ^0.0.7
 
 dev_dependencies:
   flutter_test:

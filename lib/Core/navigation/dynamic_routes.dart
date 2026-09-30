@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fynd/feature/auth/presentation/screens/otp_screen.dart';
 import 'package:fynd/feature/auth/presentation/screens/reset_password_screen.dart';
 import 'package:fynd/feature/home/presentation/screens/nav_bar_screen.dart';
+import 'package:fynd/feature/posts/presentation/screens/post_details_screen.dart';
 import 'routes_constants.dart';
 import 'route_arguments.dart';
 
@@ -36,6 +37,15 @@ abstract class DynamicRoutes {
         if (args is NavBarArguments) {
           return MaterialPageRoute(
             builder: (_) => NavBarScreen(index: args.index),
+          );
+        }
+        break;
+
+      case Routes.postDetails:
+        if (args is PostDetailsArguments) {
+          return MaterialPageRoute(
+            builder: (_) =>
+                PostDetailsScreen(postId: args.postId, postType: args.postType),
           );
         }
         break;

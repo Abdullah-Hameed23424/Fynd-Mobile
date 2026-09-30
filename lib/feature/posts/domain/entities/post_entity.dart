@@ -9,6 +9,7 @@ class PostEntity {
   final PostType type;
   final DateTime? createdAt;
   final int userId;
+  final String userEmail;
   final String? imageUrl;
   final int categoryId;
   final String categoryName;
@@ -25,5 +26,6 @@ class PostEntity {
     required this.categoryName,
     required this.date,
     required this.userId,
+    required this.userEmail,
   });
 }

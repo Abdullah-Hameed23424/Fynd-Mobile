@@ -20,6 +20,12 @@ class AppTypography {
     fontWeight: FontWeight.bold,
   );
 
+  static TextStyle get bodyLarge => TextStyle(
+    color: Colors.black,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.normal,
+  );
+
   static TextStyle get bodyMedium => TextStyle(
     color: Colors.black,
     fontSize: 16.sp,

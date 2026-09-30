@@ -17,6 +17,8 @@ class ApiEndpoints {
   static const String posts = 'post/all';
   static const String categories = 'category';
   static const String createPost = 'post/create';
+  static const String myPosts = 'post/my-own';
+  static const String postDetails = 'post/details';
 
   static const String testEndpoint = 'test';
   static String testEndpointByAttribute({required Object id}) =>

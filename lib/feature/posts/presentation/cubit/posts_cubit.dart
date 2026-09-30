@@ -7,6 +7,8 @@ import 'package:fynd/feature/posts/domain/entities/post_entity.dart';
 import 'package:fynd/feature/posts/domain/entities/post_response_entity.dart';
 import 'package:fynd/feature/posts/domain/usecases/create_post_use_case.dart';
 import 'package:fynd/feature/posts/domain/usecases/get_categories_use_case.dart';
+import 'package:fynd/feature/posts/domain/usecases/get_my_posts_use_case.dart';
+import 'package:fynd/feature/posts/domain/usecases/get_post_details_use_case.dart';
 import 'package:fynd/feature/posts/domain/usecases/get_posts_use_case.dart';
 import 'package:fynd/feature/posts/domain/usecases/get_recent_posts_use_case.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -18,11 +20,15 @@ class PostsCubit extends Cubit<PostsState> {
   final GetPostsUseCase getPostsUseCase;
   final GetCategoriesUseCase getCategoriesUseCase;
   final CreatePostUseCase createPostUseCase;
+  final GetMyPostsUseCase getMyPostsUseCase;
+  final GetPostDetailsUseCase getPostDetailsUseCase;
   PostsCubit({
     required this.getRecentPostsUseCase,
     required this.getPostsUseCase,
     required this.getCategoriesUseCase,
     required this.createPostUseCase,
+    required this.getMyPostsUseCase,
+    required this.getPostDetailsUseCase,
   }) : super(PostsInitial());
 
   final RefreshController refreshController = RefreshController();
@@ -114,6 +120,42 @@ class PostsCubit extends Cubit<PostsState> {
       if (isClosed) return;
       logApiName('createPost');
       emit(CreatePostError(msg: handleError(e, stackTrace: s)));
+    }
+  }
+
+  Future<void> getMyPosts() async {
+    emit(MyPostsLoading());
+
+    try {
+      final PostResponseEntity response = await getMyPostsUseCase();
+
+      if (isClosed) return;
+      emit(MyPostsLoaded(postResponseEntity: response));
+    } catch (e, s) {
+      if (isClosed) return;
+      logApiName('getMyPosts');
+      emit(MyPostsError(msg: handleError(e, stackTrace: s)));
+    }
+  }
+
+  Future<void> getPostDetails({
+    required int postId,
+    required int postType,
+  }) async {
+    emit(PostDetailsLoading());
+
+    try {
+      final PostEntity response = await getPostDetailsUseCase(
+        postId: postId,
+        postType: postType,
+      );
+
+      if (isClosed) return;
+      emit(PostDetailsLoaded(postEntity: response));
+    } catch (e, s) {
+      if (isClosed) return;
+      logApiName('getPostDetails');
+      emit(PostDetailsError(msg: handleError(e, stackTrace: s)));
     }
   }
 }

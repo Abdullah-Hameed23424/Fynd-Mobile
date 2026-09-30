@@ -56,6 +56,10 @@ abstract class NavigationCoordinator {
     return NavigationService.navigateTo(Routes.recentPosts);
   }
 
+  static Future<dynamic>? toPostDetails({required PostDetailsArguments args}) {
+    return NavigationService.navigateTo(Routes.postDetails, arguments: args);
+  }
+
   // ========== HELPER METHODS ==========
   static void goBack<T extends Object?>([T? result]) {
     NavigationService.goBack(result);

@@ -13,6 +13,10 @@ abstract class PostsRemoteDataSource {
   Future<Response> getCategories();
 
   Future<Response> createPost({required Map<String, dynamic> data});
+
+  Future<Response> getMyPosts();
+
+  Future<Response> getPostDetails({required int postId, required int postType});
 }
 
 class PostsRemoteDataSourceImpl implements PostsRemoteDataSource {
@@ -48,5 +52,21 @@ class PostsRemoteDataSourceImpl implements PostsRemoteDataSource {
   @override
   Future<Response<dynamic>> createPost({required Map<String, dynamic> data}) {
     return NetworkClient.post(url: ApiEndpoints.createPost, data: data);
+  }
+
+  @override
+  Future<Response<dynamic>> getMyPosts() {
+    return NetworkClient.get(url: ApiEndpoints.myPosts);
+  }
+
+  @override
+  Future<Response<dynamic>> getPostDetails({
+    required int postId,
+    required int postType,
+  }) {
+    return NetworkClient.get(
+      url: ApiEndpoints.postDetails,
+      queryParameters: {'id': postId, 'type': postType},
+    );
   }
 }

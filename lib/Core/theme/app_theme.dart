@@ -16,6 +16,7 @@ class AppTheme {
         titleLarge: AppTypography.titleLarge,
         titleMedium: AppTypography.titleMedium,
         titleSmall: AppTypography.titleSmall,
+        bodyLarge: AppTypography.bodyLarge,
         bodyMedium: AppTypography.bodyMedium,
         bodySmall: AppTypography.bodySmall,
         headlineSmall: AppTypography.headlineSmall,

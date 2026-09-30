@@ -15,6 +15,7 @@ class PostModel extends PostEntity {
     required super.categoryName,
     required super.date,
     required super.userId,
+    required super.userEmail,
   });
 
   factory PostModel.fromMap(Map<String, dynamic> json) => PostModel(
@@ -29,5 +30,6 @@ class PostModel extends PostEntity {
     categoryName: ModelParser.stringValue(json['categoryName']),
     date: ModelParser.dateTimeValue(json['data']),
     userId: ModelParser.intValue(json['userId']),
+    userEmail: ModelParser.stringValue(json['userMail']),
   );
 }

@@ -74,3 +74,39 @@ final class CreatePostError extends PostsState {
   @override
   List<Object> get props => [msg];
 }
+
+final class MyPostsLoading extends PostsState {}
+
+final class MyPostsLoaded extends PostsState {
+  final PostResponseEntity postResponseEntity;
+  const MyPostsLoaded({required this.postResponseEntity});
+
+  @override
+  List<Object> get props => [postResponseEntity];
+}
+
+final class MyPostsError extends PostsState {
+  final String msg;
+  const MyPostsError({required this.msg});
+
+  @override
+  List<Object> get props => [msg];
+}
+
+final class PostDetailsLoading extends PostsState {}
+
+final class PostDetailsLoaded extends PostsState {
+  final PostEntity postEntity;
+  const PostDetailsLoaded({required this.postEntity});
+
+  @override
+  List<Object> get props => [postEntity];
+}
+
+final class PostDetailsError extends PostsState {
+  final String msg;
+  const PostDetailsError({required this.msg});
+
+  @override
+  List<Object> get props => [msg];
+}

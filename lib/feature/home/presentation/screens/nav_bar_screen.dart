@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/feature/home/presentation/screens/home_screen.dart';
 import 'package:fynd/feature/posts/presentation/screens/create_post_screen.dart';
+import 'package:fynd/feature/posts/presentation/screens/my_posts_screen.dart';
 import 'package:fynd/feature/posts/presentation/screens/posts_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
@@ -16,7 +17,7 @@ class NavBarScreen extends StatelessWidget {
       const HomeScreen(),
       const PostsScreen(),
       const CreatePostScreen(),
-      const Center(child: Text('My Posts')),
+      const MyPostsScreen(),
       const Center(child: Text('Profile')),
     ];
     return PersistentTabView(
@@ -44,14 +45,14 @@ class NavBarScreen extends StatelessWidget {
         ),
 
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.notifications),
-          title: 'Notifications',
+          icon: const Icon(Icons.bookmark_outline),
+          title: 'My Posts',
           activeColorPrimary: Colors.blue,
           inactiveColorPrimary: Colors.grey,
         ),
 
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.person),
+          icon: const Icon(Icons.person_outline),
           title: 'Profile',
           activeColorPrimary: Colors.blue,
           inactiveColorPrimary: Colors.grey,

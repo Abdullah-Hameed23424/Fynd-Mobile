@@ -19,3 +19,9 @@ class NavBarArguments {
   final int? index;
   NavBarArguments({required this.index});
 }
+
+class PostDetailsArguments {
+  final int postId;
+  final int postType;
+  PostDetailsArguments({required this.postId, required this.postType});
+}

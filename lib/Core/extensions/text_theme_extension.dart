@@ -8,6 +8,7 @@ extension TextThemeExtension on BuildContext {
   TextStyle get titleMedium19 => textTheme.titleMedium!.copyWith();
   TextStyle get titleSmall12 => textTheme.titleSmall!.copyWith();
 
+  TextStyle get bodyLarge20 => textTheme.bodyLarge!.copyWith();
   TextStyle get bodyMedium16 => textTheme.bodyMedium!.copyWith();
   TextStyle get bodySmall14 => textTheme.bodySmall!.copyWith();
 

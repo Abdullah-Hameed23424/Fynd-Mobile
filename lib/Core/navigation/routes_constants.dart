@@ -16,4 +16,5 @@ abstract class Routes {
 
   // Posts
   static const String recentPosts = '/recentPosts';
+  static const String postDetails = '/postDetails';
 }

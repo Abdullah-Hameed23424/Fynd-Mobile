@@ -10,8 +10,8 @@ import 'package:fynd/core/widgets/custom_text_field.dart';
 import 'package:fynd/feature/posts/domain/entities/post_entity.dart';
 import 'package:fynd/feature/posts/domain/params/post_filter.dart';
 import 'package:fynd/feature/posts/presentation/cubit/posts_cubit.dart';
-import 'package:fynd/feature/posts/presentation/screens/recent_posts_screen.dart';
 import 'package:fynd/feature/posts/presentation/widgets/filter_sheet.dart';
+import 'package:fynd/feature/posts/presentation/widgets/posts_section.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class PostsScreen extends StatefulWidget {

@@ -13,4 +13,11 @@ abstract class PostsRepository {
   Future<List<CategoryEntity>> getCategories();
 
   Future<void> createPost({required Map<String, dynamic> data});
+
+  Future<PostResponseEntity> getMyPosts();
+
+  Future<PostEntity> getPostDetails({
+    required int postId,
+    required int postType,
+  });
 }
