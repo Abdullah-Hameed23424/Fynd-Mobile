@@ -2,6 +2,8 @@ import 'package:fynd/core/local_storage/flutter_secure_storage/app_storage.dart'
 import 'package:fynd/core/network/network_client.dart';
 import 'package:fynd/feature/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:fynd/feature/auth/domain/repositories/auth_repository.dart';
+import 'dart:async';
+import 'package:fynd/core/notifications/device_token_service.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
@@ -20,6 +22,8 @@ class AuthRepositoryImpl implements AuthRepository {
     await AppStorage.saveRefreshToken(data['refreshToken']);
     NetworkClient.updateAuthToken(data['accessToken']);
     await AppStorage.saveMyId(data['id']);
+
+    unawaited(DeviceTokenService.instance.initializeAfterAuthentication());
   }
 
   @override
@@ -39,6 +43,8 @@ class AuthRepositoryImpl implements AuthRepository {
     await AppStorage.saveRefreshToken(data['refreshToken']);
     NetworkClient.updateAuthToken(data['accessToken']);
     await AppStorage.saveMyId(data['id']);
+
+    unawaited(DeviceTokenService.instance.initializeAfterAuthentication());
   }
 
   @override

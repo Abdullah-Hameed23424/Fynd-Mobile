@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "290494798950",
+    "project_id": "fynd-app-8165f",
+    "storage_bucket": "fynd-app-8165f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290494798950:android:d2f162ca328baabe3b21a7",
+        "android_client_info": {
+          "package_name": "com.example.fynd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtQqYwcbCY9qZmzt3xVvH4-YsvujkgA7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

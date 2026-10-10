@@ -1,5 +1,5 @@
+import 'dart:async';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/core/local_storage/flutter_secure_storage/app_storage.dart';
@@ -8,10 +8,16 @@ import 'package:fynd/core/navigation/app_routes.dart';
 import 'package:fynd/core/navigation/navigation_service.dart';
 import 'package:fynd/core/navigation/routes_constants.dart';
 import 'package:fynd/core/network/network_client.dart';
+import 'package:fynd/core/notifications/device_token_service.dart';
+import 'package:fynd/core/notifications/foreground_notification_service.dart';
 import 'package:fynd/core/theme/app_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await ForegroundNotificationService.instance.initialize();
   await _initializeServices();
   runApp(const MyApp());
 }
@@ -20,6 +26,9 @@ Future<void> _initializeServices() async {
   await CacheHelper.init();
   await NetworkClient.init();
   _logDebugInfo();
+  if (await AppStorage.hasAccessToken) {
+    unawaited(DeviceTokenService.instance.initializeAfterAuthentication());
+  }
 }
 
 void _logDebugInfo() async {

@@ -20,6 +20,9 @@ class ApiEndpoints {
   static const String myPosts = 'post/my-own';
   static const String postDetails = 'post/details';
 
+  /// [Notifications]
+  static const String registerDeviceToken = 'Notifications/register-device';
+
   static const String testEndpoint = 'test';
   static String testEndpointByAttribute({required Object id}) =>
       'test/$id/test(maybe)';
