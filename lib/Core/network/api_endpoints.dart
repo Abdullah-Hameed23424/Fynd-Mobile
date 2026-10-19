@@ -23,6 +23,9 @@ class ApiEndpoints {
   /// [Notifications]
   static const String registerDeviceToken = 'Notifications/register-device';
 
+  /// [Profile]
+  static const String getProfile = 'users/me';
+
   static const String testEndpoint = 'test';
   static String testEndpointByAttribute({required Object id}) =>
       'test/$id/test(maybe)';

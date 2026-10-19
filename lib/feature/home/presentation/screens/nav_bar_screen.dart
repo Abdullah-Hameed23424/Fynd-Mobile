@@ -4,6 +4,7 @@ import 'package:fynd/feature/home/presentation/screens/home_screen.dart';
 import 'package:fynd/feature/posts/presentation/screens/create_post_screen.dart';
 import 'package:fynd/feature/posts/presentation/screens/my_posts_screen.dart';
 import 'package:fynd/feature/posts/presentation/screens/posts_screen.dart';
+import 'package:fynd/feature/profile/presentation/screens/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class NavBarScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class NavBarScreen extends StatelessWidget {
       const PostsScreen(),
       const CreatePostScreen(),
       const MyPostsScreen(),
-      const Center(child: Text('Profile')),
+      const ProfileScreen(),
     ];
     return PersistentTabView(
       context,

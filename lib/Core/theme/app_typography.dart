@@ -38,6 +38,12 @@ class AppTypography {
     fontWeight: FontWeight.normal,
   );
 
+  static TextStyle get headlineMedium => TextStyle(
+    color: Colors.black,
+    fontSize: 24.sp,
+    fontWeight: FontWeight.bold,
+  );
+
   static TextStyle get headlineSmall => TextStyle(
     color: Colors.black,
     fontSize: 12.sp,

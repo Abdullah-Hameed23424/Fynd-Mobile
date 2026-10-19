@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/core/constants/app_images.dart';
 import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/di/auth_dependencies.dart';
+import 'package:fynd/core/widgets/title_and_description.dart';
+import 'package:fynd/core/widgets/custom_card.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
-import 'package:fynd/feature/auth/presentation/widgets/auth_card.dart';
 import 'package:fynd/feature/auth/presentation/widgets/register_btn.dart';
 import 'package:fynd/feature/auth/presentation/widgets/register_footer.dart';
 import 'package:fynd/feature/auth/presentation/widgets/register_form.dart';
-import 'package:fynd/feature/auth/presentation/widgets/title_and_description.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -71,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        AuthCard(
+                        CustomCard(
                           children: <Widget>[
                             const TitleAndDescription(
                               title: 'Create your account',

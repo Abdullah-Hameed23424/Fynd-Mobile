@@ -60,6 +60,11 @@ abstract class NavigationCoordinator {
     return NavigationService.navigateTo(Routes.postDetails, arguments: args);
   }
 
+  // ========== Profile ==========
+  static Future<dynamic>? toEditProfile() {
+    return NavigationService.navigateTo(Routes.editProfile);
+  }
+
   // ========== HELPER METHODS ==========
   static void goBack<T extends Object?>([T? result]) {
     NavigationService.goBack(result);

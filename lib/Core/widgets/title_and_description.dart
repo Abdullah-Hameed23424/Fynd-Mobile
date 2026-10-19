@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fynd/core/theme/app_colors.dart';
-import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/animations/animated_item.dart';
+import 'package:fynd/core/extensions/text_theme_extension.dart';
+import 'package:fynd/core/theme/app_colors.dart';
 
 class TitleAndDescription extends StatelessWidget {
   final String title;

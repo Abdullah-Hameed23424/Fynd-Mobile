@@ -15,38 +15,17 @@ class DetailsBtnsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        AnimatedItem(
-          index: 7,
-          child: CustomButton(
-            label: 'Contact owner',
-            onPressed: () {
-              log(postData.userEmail);
-              // EasyUrlLauncher
-            },
-            radius: 22.r,
-            backgroundColor: Colors.transparent,
-          ),
-        ),
-
-        SizedBox(height: 12.h),
-
-        AnimatedItem(
-          index: 8,
-          child: CustomButton(
-            label: 'Report this post',
-            onPressed: () {},
-            radius: 22.r,
-            backgroundColor: Colors.white,
-            buttonStyle: context.bodyMedium16.copyWith(
-              color: AppColors.errorColor,
-              fontWeight: FontWeight.bold,
-            ),
-            border: const BorderSide(color: Color(0xffE0E5ED)),
-          ),
-        ),
-      ],
+    return AnimatedItem(
+      index: 7,
+      child: CustomButton(
+        label: 'Contact owner',
+        onPressed: () {
+          log(postData.userEmail);
+          // EasyUrlLauncher
+        },
+        radius: 22.r,
+        backgroundColor: Colors.transparent,
+      ),
     );
   }
 }

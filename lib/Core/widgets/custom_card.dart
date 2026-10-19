@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AuthCard extends StatelessWidget {
+class CustomCard extends StatelessWidget {
   final List<Widget> children;
-  const AuthCard({super.key, required this.children});
+  const CustomCard({super.key, required this.children});
 
   @override
   Widget build(BuildContext context) {

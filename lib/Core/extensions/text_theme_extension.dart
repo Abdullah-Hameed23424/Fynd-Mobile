@@ -12,5 +12,6 @@ extension TextThemeExtension on BuildContext {
   TextStyle get bodyMedium16 => textTheme.bodyMedium!.copyWith();
   TextStyle get bodySmall14 => textTheme.bodySmall!.copyWith();
 
+  TextStyle get headlineMedium24 => textTheme.headlineMedium!.copyWith();
   TextStyle get headlineSmall12 => textTheme.headlineSmall!.copyWith();
 }

@@ -72,7 +72,7 @@ class _RegisterFormState extends State<RegisterForm> {
         children: <Widget>[
           AnimatedItem(
             index: 3,
-            child: Text('Full name', style: context.titleSmall12),
+            child: Text('Fullname', style: context.titleSmall12),
           ),
           SizedBox(height: 4.h),
           AnimatedItem(

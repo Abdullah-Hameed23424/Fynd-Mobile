@@ -4,13 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/constants/app_images.dart';
 import 'package:fynd/core/di/auth_dependencies.dart';
+import 'package:fynd/core/widgets/custom_card.dart';
 import 'package:fynd/core/widgets/pop_button.dart';
+import 'package:fynd/core/widgets/title_and_description.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
-import 'package:fynd/feature/auth/presentation/widgets/auth_card.dart';
 import 'package:fynd/feature/auth/presentation/widgets/forget_password_btn.dart';
 import 'package:fynd/feature/auth/presentation/widgets/forget_password_form.dart';
 import 'package:fynd/feature/auth/presentation/widgets/forget_password_footer.dart';
-import 'package:fynd/feature/auth/presentation/widgets/title_and_description.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -75,7 +75,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     ),
                     child: Column(
                       children: <Widget>[
-                        AuthCard(
+                        CustomCard(
                           children: <Widget>[
                             const TitleAndDescription(
                               title: 'Forget Password',

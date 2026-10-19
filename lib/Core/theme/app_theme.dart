@@ -19,6 +19,7 @@ class AppTheme {
         bodyLarge: AppTypography.bodyLarge,
         bodyMedium: AppTypography.bodyMedium,
         bodySmall: AppTypography.bodySmall,
+        headlineMedium: AppTypography.headlineMedium,
         headlineSmall: AppTypography.headlineSmall,
       ).apply(bodyColor: Colors.black, displayColor: Colors.black),
     );

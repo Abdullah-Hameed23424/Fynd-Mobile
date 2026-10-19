@@ -8,13 +8,13 @@ import 'package:fynd/core/navigation/navigation_coordinator.dart';
 import 'package:fynd/core/navigation/route_arguments.dart';
 import 'package:fynd/core/services/snackbar_service.dart';
 import 'package:fynd/core/utils/custom_timer.dart';
+import 'package:fynd/core/widgets/custom_card.dart';
 import 'package:fynd/core/widgets/pop_button.dart';
+import 'package:fynd/core/widgets/title_and_description.dart';
 import 'package:fynd/feature/auth/presentation/bloc/auth_bloc.dart';
-import 'package:fynd/feature/auth/presentation/widgets/auth_card.dart';
 import 'package:fynd/feature/auth/presentation/widgets/otp_btn.dart';
 import 'package:fynd/feature/auth/presentation/widgets/otp_footer.dart';
 import 'package:fynd/feature/auth/presentation/widgets/otp_pinput.dart';
-import 'package:fynd/feature/auth/presentation/widgets/title_and_description.dart';
 
 class OtpScreen extends StatefulWidget {
   final String email;
@@ -101,7 +101,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         children: <Widget>[
                           SizedBox(height: 32.h),
 
-                          AuthCard(
+                          CustomCard(
                             children: <Widget>[
                               const TitleAndDescription(
                                 title: 'Verify Your Code',
