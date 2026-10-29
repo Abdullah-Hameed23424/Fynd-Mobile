@@ -11,17 +11,23 @@ final class ProfileInitial extends ProfileState {}
 
 final class ProfileLoading extends ProfileState {}
 
-final class ProfileLoaded extends ProfileState {
-  final ProfileEntity profileEntity;
-  const ProfileLoaded({required this.profileEntity});
-
-  @override
-  List<Object> get props => [profileEntity];
-}
+final class ProfileLoaded extends ProfileState {}
 
 final class ProfileError extends ProfileState {
   final String msg;
   const ProfileError({required this.msg});
+
+  @override
+  List<Object> get props => [msg];
+}
+
+final class EditProfileLoading extends ProfileState {}
+
+final class EditProfileSuccess extends ProfileState {}
+
+final class EditProfileError extends ProfileState {
+  final String msg;
+  const EditProfileError({required this.msg});
 
   @override
   List<Object> get props => [msg];

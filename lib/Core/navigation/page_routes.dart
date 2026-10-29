@@ -4,8 +4,8 @@ import 'package:fynd/feature/auth/presentation/screens/Register_screen.dart';
 import 'package:fynd/feature/auth/presentation/screens/forget_password_screen.dart';
 import 'package:fynd/feature/auth/presentation/screens/login_screen.dart';
 import 'package:fynd/feature/home/presentation/screens/home_screen.dart';
+import 'package:fynd/feature/notifications/presentation/screens/notifications_screen.dart';
 import 'package:fynd/feature/posts/presentation/screens/recent_posts_screen.dart';
-import 'package:fynd/feature/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:fynd/feature/splash/presentation/screens/get_start_screen.dart';
 import 'package:fynd/feature/splash/presentation/screens/splash_screen.dart';
 
@@ -20,14 +20,7 @@ abstract class PageRoutes {
       Routes.forgetPassword: (_) => const ForgetPasswordScreen(),
       Routes.home: (_) => const HomeScreen(),
       Routes.recentPosts: (_) => const RecentPostsScreen(),
-      Routes.editProfile: (_) => const EditProfileScreen(),
+      Routes.notifications: (_) => const NotificationsScreen(),
     };
-  }
-
-  /// Helper method to create a simple route
-  static Map<String, WidgetBuilder> createStaticRoutes(
-    Map<String, WidgetBuilder> routes,
-  ) {
-    return routes;
   }
 }

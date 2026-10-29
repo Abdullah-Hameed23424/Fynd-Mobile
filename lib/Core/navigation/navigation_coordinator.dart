@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:fynd/core/navigation/route_arguments.dart';
-
-import 'navigation_service.dart';
-import 'routes_constants.dart';
-import 'route_guards.dart';
+import 'package:fynd/core/navigation/navigation_service.dart';
+import 'package:fynd/core/navigation/routes_constants.dart';
+import 'package:fynd/core/navigation/route_guards.dart';
 
 abstract class NavigationCoordinator {
   // ========== Splash ==========
@@ -61,8 +59,13 @@ abstract class NavigationCoordinator {
   }
 
   // ========== Profile ==========
-  static Future<dynamic>? toEditProfile() {
-    return NavigationService.navigateTo(Routes.editProfile);
+  static Future<dynamic>? toEditProfile({required EditProfileArguments args}) {
+    return NavigationService.navigateTo(Routes.editProfile, arguments: args);
+  }
+
+  // ========== Notifications ==========
+  static Future<dynamic>? toNotifications() {
+    return NavigationService.navigateTo(Routes.notifications);
   }
 
   // ========== HELPER METHODS ==========

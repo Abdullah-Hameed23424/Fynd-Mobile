@@ -5,6 +5,7 @@ import 'package:fynd/feature/auth/presentation/screens/otp_screen.dart';
 import 'package:fynd/feature/auth/presentation/screens/reset_password_screen.dart';
 import 'package:fynd/feature/home/presentation/screens/nav_bar_screen.dart';
 import 'package:fynd/feature/posts/presentation/screens/post_details_screen.dart';
+import 'package:fynd/feature/profile/presentation/screens/edit_profile_screen.dart';
 import 'routes_constants.dart';
 import 'route_arguments.dart';
 
@@ -46,6 +47,14 @@ abstract class DynamicRoutes {
           return MaterialPageRoute(
             builder: (_) =>
                 PostDetailsScreen(postId: args.postId, postType: args.postType),
+          );
+        }
+        break;
+
+      case Routes.editProfile:
+        if (args is EditProfileArguments) {
+          return MaterialPageRoute(
+            builder: (_) => EditProfileScreen(onSuccess: args.onSuccess),
           );
         }
         break;

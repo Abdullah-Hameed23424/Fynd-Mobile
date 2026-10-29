@@ -15,4 +15,15 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
     return ProfileModel.fromMap(response.data);
   }
+
+  @override
+  Future<bool> editProfile({required Map<String, dynamic> data}) async {
+    final Response response = await remoteDataSource.editProfile(data: data);
+
+    if (response.statusCode == 204) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

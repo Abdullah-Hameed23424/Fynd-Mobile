@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'page_routes.dart';
-import 'dynamic_routes.dart';
-import 'route_observer.dart';
+import 'package:fynd/core/navigation/page_routes.dart';
+import 'package:fynd/core/navigation/dynamic_routes.dart';
+import 'package:fynd/core/navigation/route_observer.dart';
 
 /// App Routes Configuration
 /// Central configuration for all routing in the app

@@ -280,7 +280,7 @@ class Get${className}UseCase {
 
   Get${className}UseCase(this.repository);
 
-  Future<void> call() async {
+  Future<void> call() {
     // Add your use case logic here
   }
 }

@@ -38,6 +38,8 @@ class ProfileHeader extends StatelessWidget {
                 style: context.bodyLarge20.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
               Text(
                 profileEntity.email,

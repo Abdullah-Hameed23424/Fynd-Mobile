@@ -65,13 +65,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     message: state.msg,
                   ),
                 );
-              } else if (state is ProfileLoaded) {
-                final ProfileEntity profileEntity = state.profileEntity;
+              } else if (context.read<ProfileCubit>().profileDataLoaded) {
+                final ProfileEntity profileEntity = context
+                    .read<ProfileCubit>()
+                    .profileEntity;
                 return Column(
                   children: <Widget>[
                     ProfileHeader(profileEntity: profileEntity),
                     SizedBox(height: 18.h),
-                    const ChoicesList(),
+                    ChoicesList(cubit: context.read<ProfileCubit>()),
                   ],
                 );
               }

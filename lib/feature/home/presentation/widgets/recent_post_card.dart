@@ -77,7 +77,7 @@ class RecentPostCard extends StatelessWidget {
                           const TextSpan(text: ' · \n'),
                           TextSpan(
                             text: TimeFormatter.format(
-                              recentPostEntity.date ?? DateTime.now(),
+                              recentPostEntity.createdAt ?? DateTime.now(),
                             ),
                           ),
                         ],

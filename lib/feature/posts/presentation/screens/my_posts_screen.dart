@@ -73,16 +73,20 @@ class MyPostsScreen extends StatelessWidget {
               ),
             ),
 
-            PostsSection(
-              onTap: () {
-                context.read<PostsCubit>().getMyPosts();
+            Builder(
+              builder: (context) {
+                return PostsSection(
+                  onTap: () {
+                    context.read<PostsCubit>().getMyPosts();
+                  },
+                  isLoading: (state) => state is MyPostsLoading,
+                  getErrorMessage: (state) =>
+                      state is MyPostsError ? state.msg : null,
+                  getPosts: (state) => state is MyPostsLoaded
+                      ? state.postResponseEntity.posts
+                      : <PostEntity>[],
+                );
               },
-              isLoading: (state) => state is MyPostsLoading,
-              getErrorMessage: (state) =>
-                  state is MyPostsError ? state.msg : null,
-              getPosts: (state) => state is MyPostsLoaded
-                  ? state.postResponseEntity.posts
-                  : <PostEntity>[],
             ),
 
             SliverToBoxAdapter(child: SizedBox(height: 20.h)),

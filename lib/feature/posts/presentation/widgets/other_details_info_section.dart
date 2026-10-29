@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/core/animations/animated_item.dart';
@@ -12,6 +14,7 @@ class OtherDetailsInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(postData.date.toString());
     return Container(
       width: 1.sw,
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),

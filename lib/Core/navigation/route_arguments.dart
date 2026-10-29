@@ -1,4 +1,6 @@
 // Generic route arguments
+import 'package:flutter/material.dart';
+
 class RouteArguments {
   final Map<String, dynamic> data;
 
@@ -24,4 +26,9 @@ class PostDetailsArguments {
   final int postId;
   final int postType;
   PostDetailsArguments({required this.postId, required this.postType});
+}
+
+class EditProfileArguments {
+  final VoidCallback onSuccess;
+  EditProfileArguments({required this.onSuccess});
 }

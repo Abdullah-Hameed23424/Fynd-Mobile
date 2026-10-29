@@ -20,4 +20,7 @@ abstract class Routes {
 
   // Posts
   static const String editProfile = '/editProfile';
+
+  // Notifications
+  static const String notifications = '/notifications';
 }

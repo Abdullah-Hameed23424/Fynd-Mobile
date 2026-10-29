@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fynd/core/animations/animated_item.dart';
 import 'package:fynd/core/extensions/text_theme_extension.dart';
 import 'package:fynd/core/theme/app_colors.dart';
 import 'package:fynd/core/utils/validators/fullname_validator.dart';
 import 'package:fynd/core/utils/validators/phone_number_validator.dart';
+import 'package:fynd/core/widgets/confirmation_dialog.dart';
 import 'package:fynd/core/widgets/custom_text_field.dart';
+import 'package:fynd/feature/profile/presentation/cubit/profile_cubit.dart';
 
 class EditProfileForm extends StatefulWidget {
   final GlobalKey<FormState> editProfileKey;
@@ -40,6 +43,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: widget.editProfileKey,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +87,22 @@ class _EditProfileFormState extends State<EditProfileForm> {
               keyboardType: TextInputType.phone,
               textInputAction: TextInputAction.done,
               validator: PhoneNumberValidator.validate,
-              onFieldSubmitted: (_) {},
+              onFieldSubmitted: (_) {
+                if (!widget.editProfileKey.currentState!.validate()) return;
+                ConfirmationDialog.show(
+                  context,
+                  title: 'Update Profile',
+                  content: 'Are you sure?',
+                  onConfirm: () {
+                    context.read<ProfileCubit>().editProfile(
+                      data: {
+                        'userName': widget.fullnameController.text.trim(),
+                        'phoneNumber': widget.phoneNumberController.text.trim(),
+                      },
+                    );
+                  },
+                );
+              },
             ),
           ),
         ],

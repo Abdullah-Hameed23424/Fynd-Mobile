@@ -24,7 +24,13 @@ class ApiEndpoints {
   static const String registerDeviceToken = 'Notifications/register-device';
 
   /// [Profile]
-  static const String getProfile = 'users/me';
+  static const String profile = 'users/me';
+
+  /// [Notifications]
+  static const String notifications = 'notifications';
+  static const String markAllAsRead = '$notifications/read-all';
+  static String markAsRead({required Object id}) => '$notifications/$id/read';
+  static const String unreadCount = '$notifications/unread-count';
 
   static const String testEndpoint = 'test';
   static String testEndpointByAttribute({required Object id}) =>

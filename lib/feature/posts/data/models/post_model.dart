@@ -28,7 +28,7 @@ class PostModel extends PostEntity {
     imageUrl: ModelParser.stringValue(json['imageUrl']),
     categoryId: ModelParser.intValue(json['categoryId']),
     categoryName: ModelParser.stringValue(json['categoryName']),
-    date: ModelParser.dateTimeValue(json['data']),
+    date: ModelParser.dateTimeValue(json['date']),
     userId: ModelParser.intValue(json['userId']),
     userEmail: ModelParser.stringValue(json['userMail']),
   );

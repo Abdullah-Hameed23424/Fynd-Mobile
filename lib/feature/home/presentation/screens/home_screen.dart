@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       side: const BorderSide(color: Color(0xffE0E5ED)),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: NavigationCoordinator.toNotifications,
                 ),
               ),
             ),
@@ -118,10 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SliverToBoxAdapter(
                 child: AnimatedItem(
                   index: 3,
-                  child: Text(
-                    'Browse categories',
-                    style: context.titleMedium19,
-                  ),
+                  child: Text('Categories', style: context.titleMedium19),
                 ),
               ),
               SliverToBoxAdapter(child: SizedBox(height: 10.h)),
